@@ -6,14 +6,15 @@ CREATE TABLE Users(
     date_of_birth DATE,
     gender VARCHAR(10),
     subscription_id INT NOT NULL DEFAULT 0,
-    PRIMARY KEY user_id,
-    FOREIGN KEY(subscription_id) 
+    PRIMARY KEY (user_id),
+    FOREIGN KEY (subscription_id) 
         REFERENCES Subscriptions(subscription_id)
-        ON DELETE DEFAULT 
+        ON DELETE RESTRICT
         ON UPDATE CASCADE
 );
 
 CREATE TABLE Subscriptions(
-    subscription_id INT AUTO_INCREMENT PRIMARY KEY,
-    subscription VARCHAR(30) NOT NULL UNIQUE
+    subscription_id INT AUTO_INCREMENT,
+    subscription VARCHAR(30) NOT NULL UNIQUE,
+    PRIMARY KEY (subscription_id)
 );
