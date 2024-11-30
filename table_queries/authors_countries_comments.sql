@@ -1,3 +1,11 @@
+CREATE TABLE Countries (
+	country_id INT AUTO_INCREMENT,
+    name VARCHAR(20),
+    region VARCHAR(20),
+    
+    PRIMARY KEY(country_id)
+);
+
 CREATE TABLE Authors (
 	author_id INT AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
@@ -12,14 +20,6 @@ CREATE TABLE Authors (
 		REFERENCES Countries(country_id)
         ON DELETE SET NULL
         ON UPDATE CASCADE
-);
-
-CREATE TABLE Countries (
-	country_id INT AUTO_INCREMENT,
-    name VARCHAR(20),
-    region VARCHAR(20),
-    
-    PRIMARY KEY(country_id)
 );
 
 CREATE TABLE Comments (

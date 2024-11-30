@@ -1,3 +1,9 @@
+CREATE TABLE Subscriptions(
+    subscription_id INT AUTO_INCREMENT,
+    subscription VARCHAR(30) NOT NULL UNIQUE,
+    PRIMARY KEY (subscription_id)
+);
+
 CREATE TABLE Users(
     user_id INT AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
@@ -11,10 +17,4 @@ CREATE TABLE Users(
         REFERENCES Subscriptions(subscription_id)
         ON DELETE RESTRICT
         ON UPDATE CASCADE
-);
-
-CREATE TABLE Subscriptions(
-    subscription_id INT AUTO_INCREMENT,
-    subscription VARCHAR(30) NOT NULL UNIQUE,
-    PRIMARY KEY (subscription_id)
 );
