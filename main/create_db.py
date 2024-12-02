@@ -10,8 +10,13 @@ def create_database():
             auth_plugin='mysql_native_password'
         )
         cursor = connection.cursor()
-        cursor.execute(f"CREATE DATABASE IF NOT EXISTS {db_name}")
-        print(f"Database '{db_name}' created or already exists.")
+        cursor.execute(f"SHOW DATABASES LIKE '{db_name}'")
+        result = cursor.fetchone()
+        if result:
+            print(f"Database '{db_name}' already exists.")
+        else:
+            cursor.execute(f"CREATE DATABASE {db_name}")
+            print(f"Database '{db_name}' created.")
     except mysql.connector.Error as err:
         print(f"Error while creating database: {err}")
     finally:
