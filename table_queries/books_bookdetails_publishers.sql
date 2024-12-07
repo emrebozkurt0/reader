@@ -20,7 +20,7 @@ CREATE TABLE BookDetails (
     rating DECIMAL(2,1) DEFAULT 0 CHECK(rating <= 10 AND rating >=0),
 	language varchar(20),
     page_number SMALLINT,
-    image_path varchar(1024),
+    counts_of_review INT,
     
     PRIMARY KEY(book_details_id),
     
