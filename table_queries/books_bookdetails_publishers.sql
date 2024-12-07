@@ -1,3 +1,10 @@
+CREATE TABLE Publishers(
+	publisher_id INT AUTO_INCREMENT,
+    name VARCHAR(50),
+    
+    PRIMARY KEY(publisher_id)
+);
+
 CREATE TABLE Books (
 	book_id INT AUTO_INCREMENT,
     isbn CHAR(13),
@@ -11,6 +18,11 @@ CREATE TABLE Books (
     FOREIGN KEY (author_id)
 		REFERENCES Authors (author_id)
 		ON DELETE SET NULL
+        ON UPDATE CASCADE,
+    
+    FOREIGN KEY (publisher_id)
+        REFERENCES Publishers (publisher_id)
+        ON DELETE SET NULL
         ON UPDATE CASCADE
 );
 
@@ -28,12 +40,4 @@ CREATE TABLE BookDetails (
 		REFERENCES Books (book_id)
         ON DELETE CASCADE 
         ON UPDATE CASCADE
-);
-
-
-CREATE TABLE Publishers(
-	publisher_id INT AUTO_INCREMENT,
-    name VARCHAR(50),
-    
-    PRIMARY KEY(publisher_id)
 );

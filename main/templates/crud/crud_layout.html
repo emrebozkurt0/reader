@@ -1,0 +1,12 @@
+{% extends "layout.html" %} {% block content %}
+<table class="table col-12">
+  <thead>
+    <tr>
+      {%block headers%}{%endblock%}
+    </tr>
+  </thead>
+  <tbody>
+    {%block rows%}{%endblock%}
+  </tbody>
+</table>
+{% endblock %}
