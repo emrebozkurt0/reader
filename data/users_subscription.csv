@@ -1,4 +1,4 @@
-User ID;Name;Email Address;Username;Date of Birth;Gender;Subscription Plan;Subscription Plan
+user_id;name;email;username;date_of_birth;gender;subscription_plan;subscription_id
 1;Ronald Murphy;williamholland@example.com;williamholland;3.06.1953;Male;Annual;1
 2;Scott Allen;scott22@example.org;scott22;8.07.1978;Male;Monthly;2
 3;Jonathan Parrish;brooke16@example.org;brooke16;6.12.1994;Female;Monthly;2

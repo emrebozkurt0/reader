@@ -1,8 +1,11 @@
+DROP TABLE IF EXISTS Subscriptions;
+DROP TABLE IF EXISTS Users;
+
 CREATE TABLE Subscriptions(
     subscription_id INT AUTO_INCREMENT,
-    subscription VARCHAR(30) NOT NULL UNIQUE,
+    subscription_plan VARCHAR(30) NOT NULL UNIQUE,
     PRIMARY KEY (subscription_id)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE Users(
     user_id INT AUTO_INCREMENT,
@@ -17,4 +20,4 @@ CREATE TABLE Users(
         REFERENCES Subscriptions(subscription_id)
         ON DELETE RESTRICT
         ON UPDATE CASCADE
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

@@ -1,4 +1,4 @@
-Id;Title;pagesNumber;Publisher;CountsOfReview;PublishYear;Language;Authors;Rating;ISBN;publisher_id;author_id
+book_id;title;page_number;publisher_name;counts_of_review;publication_year;language;author_name;rating;isbn;publisher_id;author_id
 1;Harry Potter and the Half-Blood Prince (Harry Potter #6);652;Scholastic Inc.;28062;2006;eng;J.K. Rowling;5;439834604;1;1
 2;Harry Potter and the Order of the Phoenix (Harry Potter #5);870;Scholastic Inc.;29770;2004;eng;J.K. Rowling;4;439358078;1;1
 3;Harry Potter and the Sorcerer's Stone (Harry Potter #1);309;Scholastic Inc;75911;2003;eng;J.K. Rowling;4;432127604;2;1
