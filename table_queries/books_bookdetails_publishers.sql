@@ -1,9 +1,13 @@
+DROP TABLE IF EXISTS Publishers;
+DROP TABLE IF EXISTS Books;
+DROP TABLE IF EXISTS BookDetails;
+
 CREATE TABLE Publishers(
 	publisher_id INT AUTO_INCREMENT,
-    name VARCHAR(50),
+    publisher_name VARCHAR(50),
     
     PRIMARY KEY(publisher_id)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE Books (
 	book_id INT AUTO_INCREMENT,
@@ -24,7 +28,7 @@ CREATE TABLE Books (
         REFERENCES Publishers (publisher_id)
         ON DELETE SET NULL
         ON UPDATE CASCADE
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE BookDetails (
 	book_details_id INT AUTO_INCREMENT,
@@ -40,4 +44,4 @@ CREATE TABLE BookDetails (
 		REFERENCES Books (book_id)
         ON DELETE CASCADE 
         ON UPDATE CASCADE
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
