@@ -1,5 +1,7 @@
 import mysql.connector
 from config import db_host, db_password, db_user, db_name
+from utils.comments import Comments  
+from utils.users import Users
 
 def create_database():
     try:
@@ -13,10 +15,9 @@ def create_database():
         cursor.execute(f"SHOW DATABASES LIKE '{db_name}'")
         result = cursor.fetchone()
         if result:
-            print(f"Database '{db_name}' already exists.")
-        else:
-            cursor.execute(f"CREATE DATABASE {db_name}")
-            print(f"Database '{db_name}' created.")
+            cursor.execute(f"DROP DATABASE {db_name}")
+        cursor.execute(f"CREATE DATABASE {db_name}")
+        print(f"Database '{db_name}' created.")
     except mysql.connector.Error as err:
         print(f"Error while creating database: {err}")
     finally:
@@ -68,9 +69,30 @@ def initialize_database():
             cursor.close()
             connection.close()
 
+def fill_tables():
+    try:
+        connection = mysql.connector.connect(
+            user=db_user,
+            password=db_password,
+            host=db_host,
+            database=db_name,
+            auth_plugin='mysql_native_password'
+        )
+        users = Users(connection)
+        comments = Comments(connection)
+        users.fill('./data/users_subscription.csv')
+        comments.fill('./data/comments.csv')  
+
+    except mysql.connector.Error as err:
+        print(f"Error while filling comments table: {err}")
+    finally:
+        if connection.is_connected():
+            connection.close()
+
 if __name__ == "__main__":
     try:
         create_database()
         initialize_database()
+        fill_tables()
     except Exception as e:
         print(f"An unexpected error occurred: {e}")

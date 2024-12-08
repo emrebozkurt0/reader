@@ -28,7 +28,7 @@ CREATE TABLE Authors (
 
 CREATE TABLE Comments (
 	comment_id INT AUTO_INCREMENT,
-    comment_date DATETIME DEFAULT NOW(),
+    comment_datetime DATETIME DEFAULT NOW(),
     user_id INT,
     content TEXT NOT NULL,
     score INT DEFAULT 0,
@@ -38,5 +38,5 @@ CREATE TABLE Comments (
     FOREIGN KEY(user_id)
 		REFERENCES Users(user_id)
         ON DELETE CASCADE
-        ON UPDATE CASCADE,
+        ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

@@ -6,6 +6,7 @@ CREATE TABLE Subscriptions(
     subscription_plan VARCHAR(30) NOT NULL UNIQUE,
     PRIMARY KEY (subscription_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+INSERT INTO Subscriptions VALUES (1, 'No Subscription'), (2, 'Annual'), (3, 'Monthly');
 
 CREATE TABLE Users(
     user_id INT AUTO_INCREMENT,
