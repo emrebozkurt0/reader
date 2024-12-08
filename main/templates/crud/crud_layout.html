@@ -1,6 +1,12 @@
 {% extends "layout.html" %} {% block content %}
-<div>
-  <h2 style="margin-bottom: 24px">{%block header%}{%endblock%}</h2>
+<div
+  class="d-flex align-items-center justify-content-between"
+  style="margin-bottom: 24px"
+>
+  <h2>{%block header%}{%endblock%}</h2>
+  <a href="{%block add%}{%endblock%}" class="btn btn-success"
+    >{%block add_title%}{%endblock%}</a
+  >
 </div>
 <table class="table col-12">
   <thead>
