@@ -1,5 +1,5 @@
 {% extends "/crud/crud_layout.html" %} {% block title %} Users {% endblock %}
-{%block headers%}
+{%block header%}Users{%endblock%} {%block headers%}
 <th scope="col">User Id</th>
 <th scope="col">Name</th>
 <th scope="col">Email</th>
@@ -8,4 +8,14 @@
 <th scope="col">Gender</th>
 <th scope="col">Subscription Id</th>
 <th scope="col">Operations</th>
-{%endblock%}
+{%endblock%} {%block rows%} {%for user in users%}
+<tr>
+  <td>{{user[0]}}</td>
+  <td>{{user[1]}}</td>
+  <td>{{user[2]}}</td>
+  <td>{{user[3]}}</td>
+  <td>{{user[4]}}</td>
+  <td>{{user[5]}}</td>
+  <td>{{user[6]}}</td>
+</tr>
+{%endfor%} {% endblock %}

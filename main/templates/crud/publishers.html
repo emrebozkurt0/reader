@@ -1,6 +1,11 @@
-{% extends "/crud/crud_layout.html" %} {% block title %} Publishers {% endblock %}
-{%block headers%}
+{% extends "/crud/crud_layout.html" %} {% block title %} Publishers {% endblock
+%} {%block header%}Publishers{%endblock%} {%block headers%}
 <th scope="col">Publisher Id</th>
 <th scope="col">Name</th>
 <th scope="col">Operations</th>
-{%endblock%}
+{%endblock%} {%block rows%} {%for publisher in publishers%}
+<tr>
+  <td>{{publisher[0]}}</td>
+  <td>{{publisher[1]}}</td>
+</tr>
+{%endfor%} {% endblock %}
