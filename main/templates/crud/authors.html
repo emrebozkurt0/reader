@@ -7,4 +7,13 @@
 <th scope="col">Image URL</th>
 <th scope="col">Country Id</th>
 <th scope="col">Operations</th>
-{%endblock%}
+{%endblock%} {%block rows%} {%for author in authors%}
+<tr>
+  <td>{{author[0]}}</td>
+  <td>{{author[1]}}</td>
+  <td>{{author[2]}}</td>
+  <td>{{author[3]}}</td>
+  <td>{{author[4]}}</td>
+  <td>{{author[5]}}</td>
+</tr>
+{%endfor%} {%endblock%}
