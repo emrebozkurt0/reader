@@ -5,7 +5,6 @@ output_file = "cleaned_data.csv"
 
 df = pd.read_csv(input_file, delimiter=";")
 
-# Drop rows where the "comment_id" column is empty
 column_name = "comment_id"
 df = df[df[column_name].notna() & (df[column_name] != "")]
 
