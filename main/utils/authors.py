@@ -1,24 +1,118 @@
 class Authors:
     def __init__(self, connection):
-        self.columns = ["author_id", "name", "gender", "about", "img_url", "country_id"]
+        self.columns = ["author_id", "author_name", "gender", "about", "img_url", "country_id"]
         self.connection = connection
 
-    def primary_key_generator(self):
-        pass
+    def add(self, author_data):
+        try:
+            cursor = self.connection.cursor()
 
-    def add(self):
-        pass
+            required_fields = ['author_name', 'country_id']
+            for field in required_fields:
+                if field not in author_data or not author_data[field]:
+                    raise ValueError(f"Missing or invalid field: {field}")
+            
+            fields = ', '.join(self.columns[1:])
+            placeholders = ', '.join(['%s'] * (len(self.columns) - 1))
+            query = f"INSERT INTO Authors ({fields}) VALUES ({placeholders})"
+            values = tuple(author_data.get(col) for col in self.columns[1:])
 
-    def update(self):
-        pass
+            cursor.execute(query, values)
+            self.connection.commit()
+            cursor.close()
+            print(f"Added author: {values}")
+        except Exception as e:
+            print(f"Error adding author: {e}")
 
-    def delete(self):
-        pass
-        
-    def search(self):
-        pass
+    def update(self, author_id, updates):
+        try:
+            cursor = self.connection.cursor()
 
-    def filter(self):
-        pass
+            update_clauses = ', '.join([f"{col} = %s" for col in updates.keys()])
+            query = f"UPDATE Authors SET {update_clauses} WHERE author_id = %s"
+            values = list(updates.values()) + [author_id]
 
-    
+            cursor.execute(query, values)
+            self.connection.commit()
+            cursor.close()
+            print(f"Author {author_id} updated with: {updates}")
+        except Exception as e:
+            print(f"Error updating author {author_id}: {e}")
+
+    def delete(self, author_id):
+        try:
+            cursor = self.connection.cursor()
+            query = "DELETE FROM Authors WHERE author_id = %s"
+            cursor.execute(query, (author_id,))
+            self.connection.commit()
+            cursor.close()
+            print(f"Author {author_id} has been deleted.")
+        except Exception as e:
+            print(f"Error deleting author {author_id}: {e}")
+
+    def search(self, filters):
+        try:
+            cursor = self.connection.cursor()
+
+            conditions = []
+            values = []
+            for field, value in filters.items():
+                if value is not None:
+                    conditions.append(f"{field} LIKE %s")
+                    values.append(f"%{value}%")
+            where_clause = " AND ".join(conditions) if conditions else "1=1"
+
+            query = f"SELECT * FROM Authors WHERE {where_clause}"
+            cursor.execute(query, tuple(values))
+            results = cursor.fetchall()
+            cursor.close()
+
+            print(f"Found {len(results)} authors matching filters: {filters}")
+            return results
+        except Exception as e:
+            print(f"Error searching authors: {e}")
+            return []
+
+    def filter_by_gender(self, gender=None):
+        try:
+            cursor = self.connection.cursor()
+
+            conditions = []
+            values = []
+            if gender is not None:
+                conditions.append("gender = %s")
+                values.append(gender)
+            where_clause = " AND ".join(conditions) if conditions else "1=1"
+
+            query = f"SELECT * FROM Authors WHERE {where_clause}"
+            cursor.execute(query, tuple(values))
+            results = cursor.fetchall()
+            cursor.close()
+
+            print(f"Filtered authors by gender={gender}")
+            return results
+        except Exception as e:
+            print(f"Error filtering authors by gender: {e}")
+            return []
+
+    def filter_by_country(self, country_id=None):
+        try:
+            cursor = self.connection.cursor()
+
+            conditions = []
+            values = []
+            if country_id is not None:
+                conditions.append("country_id = %s")
+                values.append(country_id)
+            where_clause = " AND ".join(conditions) if conditions else "1=1"
+
+            query = f"SELECT * FROM Authors WHERE {where_clause}"
+            cursor.execute(query, tuple(values))
+            results = cursor.fetchall()
+            cursor.close()
+
+            print(f"Filtered authors by country_id={country_id}")
+            return results
+        except Exception as e:
+            print(f"Error filtering authors by country_id: {e}")
+            return []
