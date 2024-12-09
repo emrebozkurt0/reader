@@ -109,7 +109,7 @@ def authors():
 def add_author():
     if request.method == "POST":
         data = {
-            "name": request.form["name"],
+            "author_name": request.form["name"],
             "gender": request.form["gender"],
             "about": request.form["about"],
             "img_url": request.form["img_url"],
@@ -135,9 +135,10 @@ def comments():
 def add_comment():
     if request.method == "POST":
         data = {
-            "comment_text": request.form["comment_text"],
             "user_id": request.form["user_id"],
             "book_id": request.form["book_id"],
+            "content": request.form["comment_text"],
+            "score": request.form["score"],
         }
         try:
             connection = mysql.connector.connect(
