@@ -130,7 +130,7 @@ def add_author():
 @app.route("/comments")
 def comments():
     comments = get_table_data("Comments")
-    return render_template("/crud/comments.html", comments=comments)
+    return render_template("/crud/comments/comments.html", comments=comments)
 @app.route("/comments/add", methods=["GET", "POST"])
 def add_comment():
     if request.method == "POST":
