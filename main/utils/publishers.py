@@ -1,6 +1,6 @@
 class Publishers:
     def __init__(self, connection):
-        self.columns = ["publisher_id", "name"]
+        self.columns = ["publisher_id", "publisher_name"]
         self.connection = connection
 
     def add(self, data):
@@ -10,7 +10,7 @@ class Publishers:
         VALUES (%s)
         """
         values = (
-            data["name"],
+            data["publisher_name"],
         )
         try:
             cursor.execute(query, values)

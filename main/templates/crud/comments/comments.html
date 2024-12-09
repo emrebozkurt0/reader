@@ -1,0 +1,18 @@
+{% extends "/crud/crud_layout.html" %} {% block title %} Comments {% endblock %}
+{% block header %}Comments{% endblock %} {% block add %}comments/add{% endblock
+%} {% block add_title %}Add Comment{% endblock %} {% block headers %}
+<th scope="col">Comment ID</th>
+<th scope="col">Comment Datetime</th>
+<th scope="col">User ID</th>
+<th scope="col">Content</th>
+<th scope="col">Score</th>
+<th scope="col">Operations</th>
+{% endblock %} {% block rows %} {% for comment in comments %}
+<tr>
+  <td>{{ comment[0] }}</td>
+  <td>{{ comment[1] }}</td>
+  <td>{{ comment[2] }}</td>
+  <td>{{ comment[3] }}</td>
+  <td>{{ comment[4] }}</td>
+</tr>
+{% endfor %} {% endblock %}
