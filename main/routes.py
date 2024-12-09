@@ -84,7 +84,7 @@ def publishers():
 def add_publisher():
     if request.method == "POST":
         data = {
-            "name": request.form["name"],
+            "publisher_name": request.form["name"],
         }
         try:
             connection = mysql.connector.connect(
