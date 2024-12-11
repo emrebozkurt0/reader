@@ -1,8 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from main.utils.publishers import Publishers
+from main.classes.publishers import Publishers
 from main.utils.get_data import get_table_data
-import mysql.connector
-from ..config import db_host, db_user, db_password
+from main.utils.database import get_connection
 
 publishers_bp = Blueprint('publishers', __name__)
 
@@ -18,9 +17,7 @@ def add_publisher():
             "publisher_name": request.form["name"],
         }
         try:
-            connection = mysql.connector.connect(
-                host=db_host, user=db_user, password=db_password, database="reader"
-            )
+            connection = get_connection()
             publisher = Publishers(connection)
             publisher.add(data)
             return redirect(url_for("publishers.publishers"))

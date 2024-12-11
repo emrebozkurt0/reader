@@ -1,8 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from main.utils.users import Users
+from main.classes.users import Users
 from main.utils.get_data import get_table_data
-import mysql.connector
-from ..config import db_host, db_user, db_password
+from main.utils.database import get_connection
 
 users_bp = Blueprint('users', __name__)
 
@@ -24,9 +23,7 @@ def add_user():
             "subscription_id": request.form["subscription_id"],
         }
         try:
-            connection = mysql.connector.connect(
-                host=db_host, user=db_user, password=db_password, database="reader"
-            )
+            connection = get_connection()
             user = Users(connection)
             user.add(data)
             return redirect(url_for("users.users"))

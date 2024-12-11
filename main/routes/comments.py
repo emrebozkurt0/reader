@@ -1,8 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from main.utils.comments import Comments
+from main.classes.comments import Comments
 from main.utils.get_data import get_table_data
-import mysql.connector
-from ..config import db_host, db_user, db_password
+from main.utils.database import get_connection
 
 comments_bp = Blueprint('comments', __name__)
 
@@ -21,9 +20,7 @@ def add_comment():
             "score": request.form["score"],
         }
         try:
-            connection = mysql.connector.connect(
-                host=db_host, user=db_user, password=db_password, database="reader"
-            )
+            connection = get_connection()
             comment = Comments(connection)
             comment.add(data)
             return redirect(url_for("comments.comments"))

@@ -12,7 +12,7 @@ CREATE TABLE Countries (
 
 CREATE TABLE Authors (
 	author_id INT AUTO_INCREMENT,
-    author_name VARCHAR(50) NOT NULL,
+    author_name VARCHAR(100) NOT NULL,
     gender VARCHAR(10),
     about TEXT,
     img_url VARCHAR(250),

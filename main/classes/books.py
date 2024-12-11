@@ -1,3 +1,5 @@
+from main.utils.get_data import fill_table
+
 class Books:
     def __init__(self, connection):
         self.columns = [
@@ -9,6 +11,13 @@ class Books:
             "publisher_id",
         ]
         self.connection = connection
+        fill_table(
+            self.connection, 
+            './data/book_and_details.csv', 
+            self.columns, 
+            'Books'
+        )
+
 
     def add(self, data):
         cursor = self.connection.cursor()

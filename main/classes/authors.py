@@ -1,7 +1,22 @@
+from main.utils.get_data import fill_table
+
 class Authors:
     def __init__(self, connection):
-        self.columns = ["author_id", "author_name", "gender", "about", "img_url", "country_id"]
+        self.columns = [
+            "author_id", 
+            "author_name", 
+            "gender", 
+            "about", 
+            "img_url", 
+            "country_id"
+        ]
         self.connection = connection
+        fill_table(
+            self.connection, 
+            './data/authors_countries.csv', 
+            self.columns, 
+            'Authors'
+        )
 
     def add(self, author_data):
         try:

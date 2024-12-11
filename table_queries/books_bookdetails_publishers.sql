@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS BookDetails;
 
 CREATE TABLE Publishers(
 	publisher_id INT AUTO_INCREMENT,
-    publisher_name VARCHAR(50),
+    publisher_name VARCHAR(100),
     
     PRIMARY KEY(publisher_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -12,7 +12,7 @@ CREATE TABLE Publishers(
 CREATE TABLE Books (
 	book_id INT AUTO_INCREMENT,
     isbn CHAR(13),
-    title VARCHAR(50) NOT NULL,
+    title VARCHAR(300) NOT NULL,
     author_id INT,
     publication_year YEAR,
     publisher_id INT,

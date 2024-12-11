@@ -1,29 +1,27 @@
 import mysql.connector
-from config import db_host, db_password, db_user, db_name
-from utils.comments import Comments  
-from utils.users import Users
+from database import get_connection
+from main.classes.authors import Authors
+from main.classes.comments import Comments  
+from main.classes.publishers import Publishers
+from main.classes.users import Users
+from main.classes.books import Books
+from main.classes.countries import Countries
 
-def create_database():
+def create_database(connection):
     try:
-        connection = mysql.connector.connect(
-            host=db_host,
-            user=db_user,
-            password=db_password,
-            auth_plugin='mysql_native_password'
-        )
         cursor = connection.cursor()
-        cursor.execute(f"SHOW DATABASES LIKE '{db_name}'")
+        cursor.execute(f"SHOW DATABASES LIKE 'reader'")
         result = cursor.fetchone()
         if result:
-            cursor.execute(f"DROP DATABASE {db_name}")
-        cursor.execute(f"CREATE DATABASE {db_name}")
-        print(f"Database '{db_name}' created.")
+            cursor.execute(f"DROP DATABASE reader")
+        cursor.execute(f"CREATE DATABASE reader")
+        print(f"Database 'reader' created.")
+        cursor.execute('USE reader')
     except mysql.connector.Error as err:
         print(f"Error while creating database: {err}")
     finally:
         if connection.is_connected():
             cursor.close()
-            connection.close()
 
 def execute_scripts_from_file(cursor, filename):
     try:
@@ -41,15 +39,8 @@ def execute_scripts_from_file(cursor, filename):
     except Exception as err:
         print(f"Error reading file {filename}: {err}")
 
-def initialize_database():
+def initialize_database(connection):
     try:
-        connection = mysql.connector.connect(
-            user=db_user,
-            password=db_password,
-            host=db_host,
-            database=db_name,
-            auth_plugin='mysql_native_password'
-        )
         cursor = connection.cursor()
 
         sql_files = [
@@ -59,7 +50,6 @@ def initialize_database():
         ]
         for sql_file in sql_files:
             execute_scripts_from_file(cursor, sql_file)
-
         connection.commit()
         print("Database initialized successfully with tables.")
     except mysql.connector.Error as err:
@@ -67,32 +57,28 @@ def initialize_database():
     finally:
         if connection.is_connected():
             cursor.close()
-            connection.close()
 
-def fill_tables():
+def fill_tables(connection):
     try:
-        connection = mysql.connector.connect(
-            user=db_user,
-            password=db_password,
-            host=db_host,
-            database=db_name,
-            auth_plugin='mysql_native_password'
-        )
-        users = Users(connection)
-        comments = Comments(connection)
-        users.fill('./data/users_subscription.csv')
-        comments.fill('./data/comments.csv')  
+        Users(connection)
+        Comments(connection)
+        Publishers(connection)
+        Countries(connection)
+        Authors(connection)
+        Books(connection)
 
     except mysql.connector.Error as err:
         print(f"Error while filling comments table: {err}")
-    finally:
-        if connection.is_connected():
-            connection.close()
 
 if __name__ == "__main__":
     try:
-        create_database()
-        initialize_database()
-        fill_tables()
+        connection = get_connection()
+        create_database(connection)
+        initialize_database(connection)
+        fill_tables(connection)
+
+        if connection.is_connected():
+            connection.close()
+
     except Exception as e:
         print(f"An unexpected error occurred: {e}")

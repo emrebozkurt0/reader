@@ -1,7 +1,18 @@
+from main.utils.get_data import fill_table
+
 class Publishers:
     def __init__(self, connection):
-        self.columns = ["publisher_id", "publisher_name"]
+        self.columns = [
+            "publisher_id", 
+            "publisher_name"
+        ]
         self.connection = connection
+        fill_table(
+            self.connection, 
+            './data/book_and_details.csv', 
+            self.columns, 
+            'Publishers'
+        )
 
     def add(self, data):
         cursor = self.connection.cursor()
