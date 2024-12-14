@@ -1,14 +1,34 @@
 {% extends "/crud/crud_layout.html" %} {% block title %} Publishers {% endblock
-%} {%block header%}Publishers{%endblock%} {%block
-add%}publishers/add{%endblock%} {%block add_title%}Add Publisher{%endblock%}
-{%block headers%}
-
+%} {% block header %}Publishers{% endblock %} {% block add %}publishers/add{%
+endblock %} {% block add_title %}Add Publisher{% endblock %} {% block headers %}
 <th scope="col">Publisher Id</th>
 <th scope="col">Name</th>
 <th scope="col">Operations</th>
-{%endblock%} {%block rows%} {%for publisher in publishers%}
+{% endblock %} {% block rows %} {% for publisher in publishers %}
 <tr>
-  <td>{{publisher[0]}}</td>
-  <td>{{publisher[1]}}</td>
+  <td>{{ publisher[0] }}</td>
+  <td>{{ publisher[1] }}</td>
+  <td class="d-flex justify-content-start gap-3">
+    <button
+      class="btn btn-primary"
+      onclick="location.href='/publishers/update/{{ publisher[0] }}'"
+    >
+      Update
+    </button>
+    <form
+      action="/publishers/delete/{{ publisher[0] }}"
+      method="POST"
+      style="display: inline"
+      onsubmit="return confirmDelete()"
+    >
+      <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+  </td>
 </tr>
-{%endfor%} {% endblock %}
+{% endfor %} {% endblock %} {% block scripts %}
+<script>
+  function confirmDelete() {
+    return confirm("Are you sure you want to delete this publisher?");
+  }
+</script>
+{% endblock %}
