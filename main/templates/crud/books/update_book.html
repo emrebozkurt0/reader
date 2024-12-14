@@ -1,0 +1,27 @@
+{% extends "/crud/add_layout.html"%}
+{% block add_title %}Update Book{% endblock %}
+{% block add_header %}Update Book{% endblock %}
+{% block add_button %}Update Book{% endblock %}
+{% block action %}/books/update/{{ book.id }}{% endblock %}
+{% block fields %}
+<div class="mb-3">
+    <label for="isbn" class="form-label">ISBN</label>
+    <input type="text" class="form-control" id="isbn" name="isbn" value="{{ book.isbn }}" maxlength="13" required>
+</div>
+<div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input type="text" class="form-control" id="title" name="title" value="{{ book.title }}" maxlength="100" required>
+</div>
+<div class="mb-3">
+    <label for="author_id" class="form-label">Author ID</label>
+    <input type="text" class="form-control" id="author_id" name="author_id" value="{{ book.author_id }}" required>
+</div>
+<div class="mb-3">
+    <label for="publication_year" class="form-label">Publication Year</label>
+    <input type="text" class="form-control" id="publication_year" name="publication_year" value="{{ book.publication_year }}" required>
+</div>
+<div class="mb-3">
+    <label for="publisher_id" class="form-label">Publisher ID</label>
+    <input type="text" class="form-control" id="publisher_id" name="publisher_id" value="{{ book.publisher_id }}" required>
+</div>
+{% endblock %}
