@@ -1,5 +1,5 @@
 import mysql.connector
-from main.utils.config import db_host, db_user, db_password
+from ..config import db_host, db_user, db_password
 
 def get_connection():
     connection = mysql.connector.connect(
