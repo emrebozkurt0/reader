@@ -9,7 +9,8 @@ class Users:
             "username", 
             "date_of_birth", 
             "gender", 
-            "subscription_id"
+            "subscription_id", 
+            "password"
         ]
         self.connection = connection
         fill_table(
