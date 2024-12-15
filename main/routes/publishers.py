@@ -2,17 +2,20 @@ from flask import Blueprint, render_template, request, redirect, url_for
 from main.classes.publishers import Publishers
 from main.utils.get_data import get_table_data
 from main.utils.database import get_connection
+from main.utils.decorators import login_required
 
 publishers_bp = Blueprint("publishers", __name__)
 
 
 @publishers_bp.route("/publishers")
+@login_required
 def publishers():
     publishers = get_table_data("Publishers")
     return render_template("/crud/publishers/publishers.html", publishers=publishers)
 
 
 @publishers_bp.route("/publishers/add", methods=["GET", "POST"])
+@login_required
 def add_publisher():
     if request.method == "POST":
         data = {
@@ -29,6 +32,7 @@ def add_publisher():
 
 
 @publishers_bp.route("/publishers/update/<int:id>", methods=["GET", "POST"])
+@login_required
 def update_publisher(id):
     if request.method == "POST":
         data = {
@@ -54,6 +58,7 @@ def update_publisher(id):
 
 
 @publishers_bp.route("/publishers/delete/<int:id>", methods=["POST"])
+@login_required
 def delete_publisher(id):
     try:
         connection = get_connection()
