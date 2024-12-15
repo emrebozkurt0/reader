@@ -13,9 +13,10 @@ CREATE TABLE Users(
     name VARCHAR(50) NOT NULL,
     email VARCHAR(50) NOT NULL UNIQUE,
     username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
     date_of_birth DATE,
     gender VARCHAR(10),
-    subscription_id INT NOT NULL DEFAULT 0,
+    subscription_id INT NOT NULL DEFAULT 1,
     PRIMARY KEY (user_id),
     FOREIGN KEY (subscription_id) 
         REFERENCES Subscriptions(subscription_id)

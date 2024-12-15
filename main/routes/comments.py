@@ -2,15 +2,18 @@ from flask import Blueprint, render_template, request, redirect, url_for
 from main.classes.comments import Comments
 from main.utils.get_data import get_table_data
 from main.utils.database import get_connection
+from main.utils.decorators import login_required
 
 comments_bp = Blueprint('comments', __name__)
 
 @comments_bp.route("/comments")
+@login_required
 def comments():
     comments = get_table_data("Comments")
     return render_template("/crud/comments/comments.html", comments=comments)
 
 @comments_bp.route("/comments/add", methods=["GET", "POST"])
+@login_required
 def add_comment():
     if request.method == "POST":
         data = {

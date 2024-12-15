@@ -2,16 +2,19 @@ from flask import Blueprint, render_template, request, redirect, url_for
 from main.classes.authors import Authors
 from main.utils.get_data import get_table_data
 from main.utils.database import get_connection
+from main.utils.decorators import login_required
 
 authors_bp = Blueprint('authors', __name__)
 
 @authors_bp.route("/authors")
+@login_required
 def authors():
     authors = get_table_data("Authors")
     countries = get_table_data("Countries")
     return render_template("/crud/authors/authors.html", authors=authors, countries=countries)
 
 @authors_bp.route("/authors/add", methods=["GET", "POST"])
+@login_required
 def add_author():
     if request.method == "POST":
         data = {

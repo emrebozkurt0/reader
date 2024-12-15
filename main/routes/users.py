@@ -2,16 +2,19 @@ from flask import Blueprint, render_template, request, redirect, url_for
 from main.classes.users import Users
 from main.utils.get_data import get_table_data
 from main.utils.database import get_connection
+from main.utils.decorators import login_required
 
 users_bp = Blueprint('users', __name__)
 
 @users_bp.route("/users")
+@login_required
 def users():
     users = get_table_data("Users")
     subscriptions = get_table_data("Subscriptions")
     return render_template("/crud/users/users.html", users=users, subscriptions=subscriptions)
 
 @users_bp.route("/users/add", methods=["GET", "POST"])
+@login_required
 def add_user():
     if request.method == "POST":
         data = {
