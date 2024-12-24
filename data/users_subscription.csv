@@ -2457,3 +2457,4 @@ user_id;name;email;username;date_of_birth;gender;subscription_plan;subscription_
 2456;Morgan Barnes;erikaholland@example.net;erikaholland;1972-03-31;Female;No Subscription;1;$2b$12$eK0N.ox/7exdrmIoSNkh6OCPXpfH1N72YnZsjBRBBbgI3EHFucuZW
 2457;Gina Castaneda;reedcourtney@example.net;reedcourtney;1965-08-02;Female;No Subscription;1;$2b$12$V65AXNOqxWuvGq3tAOoc8eQ10XoNeHELESWQkZFEcghy785Uh8gdG
 2458;Mark Nicholson;martinisaac@example.net;martinisaac;1972-11-13;Female;No Subscription;1;$2b$12$IFwGMWqanspbjKWC9jDQm.P3eSxCSBUg3MxaTVc886M.DgV6NIH5i
+2459;Admin;admin@admin.com;admin;1972-11-13;Male;No Subscription;1;$2b$12$ku.qDX1d9ie9Xe24wK6SxuB.Gnjz6aQ20ElNNWWr2qKG7nYUCFPd6
