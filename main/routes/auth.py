@@ -88,6 +88,7 @@ def register():
                     )
                     connection.commit()
                     msg = 'You have successfully registered!'
+                    
             except mysql.connector.Error as err:
                 msg = f"Database error: {err}"
     elif request.method == 'POST':

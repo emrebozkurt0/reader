@@ -17,5 +17,19 @@ add_title%}Add Author{%endblock%}
   <td>{{author[3]}}</td>
   <td>{{author[4]}}</td>
   <td>{{author[5]}}</td>
+  <td>
+    <button class="btn btn-primary" onclick="location.href='/authors/update/{{ author[0] }}'">Update</button>
+    <form action="/authors/delete/{{ author[0] }}" method="POST" style="display:inline;" onsubmit="return confirmDelete()">
+      <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+  </td>
 </tr>
 {%endfor%} {%endblock%}
+
+{% block scripts %}
+<script>
+function confirmDelete() {
+    return confirm("Are you sure you want to delete this author?");
+}
+</script>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "/crud/add_layout.html" %}
+{% block add_title %}Update Author{% endblock %}
+{% block add_header %}Update Author{% endblock %}
+{% block add_button %}Update Author{% endblock %}
+{% block action %}/authors/update/{{ author.id }}{% endblock %}
+{% block fields %}
+<div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input type="text" class="form-control" id="name" name="name" value="{{ author.author_name }}" maxlength="100" required>
+</div>
+<div class="mb-3">
+    <label for="gender" class="form-label">Gender</label>
+    <select class="form-control" id="gender" name="gender" required>
+        <option value="Male" {% if author.gender == 'Male' %}selected{% endif %}>Male</option>
+        <option value="Female" {% if author.gender == 'Female' %}selected{% endif %}>Female</option>
+        <option value="Other" {% if author.gender == 'Other' %}selected{% endif %}>Other</option>
+    </select>
+</div>
+<div class="mb-3">
+    <label for="about" class="form-label">About</label>
+    <textarea class="form-control" id="about" name="about" maxlength="500">{{ author.about }}</textarea>
+</div>
+<div class="mb-3">
+    <label for="img_url" class="form-label">Image URL</label>
+    <input type="url" class="form-control" id="img_url" name="img_url" value="{{ author.img_url }}">
+</div>
+<div class="mb-3">
+    <label for="country_id" class="form-label">Country ID</label>
+    <input type="text" class="form-control" id="country_id" name="country_id" value="{{ author.country_id }}" required>
+</div>
+{% endblock %}
