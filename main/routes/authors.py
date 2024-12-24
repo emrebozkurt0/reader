@@ -32,3 +32,42 @@ def add_author():
         except Exception as e:
             return f"Error occurred while adding the author: {e}", 500
     return render_template("/crud/authors/add_author.html")
+
+@authors_bp.route("/authors/update/<int:id>", methods=["GET", "POST"])
+@login_required
+def update_author(id):
+    if request.method == "POST":
+        data = {
+            "author_name": request.form["name"],
+            "gender": request.form["gender"],
+            "about": request.form["about"],
+            "img_url": request.form["img_url"],
+            "country_id": request.form["country_id"],
+        }
+        try:
+            connection = get_connection()
+            author = Authors(connection)
+            author.update(data, id)
+            return redirect(url_for("authors.authors"))
+        except Exception as e:
+            return f"Error occurred while updating the author: {e}", 500
+    else:
+        try:
+            connection = get_connection()
+            author = Authors(connection)
+            author_data = author.get_by_id(id)
+            return render_template("/crud/authors/update_author.html", author=author_data)
+        except Exception as e:
+            return f"Error occurred while fetching the author data: {e}", 500
+
+
+@authors_bp.route("/authors/delete/<int:id>", methods=["POST"])
+@login_required
+def delete_author(id):
+    try:
+        connection = get_connection()
+        author = Authors(connection)
+        author.delete(id)
+        return redirect(url_for("authors.authors"))
+    except Exception as e:
+        return f"Error occurred while deleting the author: {e}", 500
