@@ -1,7 +1,7 @@
 from main.utils.get_data import fill_table
 
 class Books:
-    def __init__(self, connection):
+    def __init__(self, connection, fill=False):
         self.columns = [
             "book_id",
             "isbn",
@@ -15,7 +15,8 @@ class Books:
             self.connection, 
             './data/book_and_details.csv', 
             self.columns, 
-            'Books'
+            'Books',
+            fill=fill
         )
 
 

@@ -61,12 +61,12 @@ def initialize_database(connection):
 
 def fill_tables(connection):
     try:
-        Users(connection)
-        Countries(connection)
-        Authors(connection)
-        Publishers(connection)
-        Books(connection)
-        Comments(connection)
+        Users(connection, fill=True)
+        Countries(connection, fill=True)
+        Authors(connection, fill=True)
+        Publishers(connection, fill=True)
+        Books(connection, fill=True)
+        Comments(connection, fill=True)
 
     except mysql.connector.Error as err:
         print(f"Error while filling comments table: {err}")

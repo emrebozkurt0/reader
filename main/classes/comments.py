@@ -1,7 +1,7 @@
 from main.utils.get_data import fill_table
 
 class Comments:
-    def __init__(self, connection):
+    def __init__(self, connection, fill=False):
         self.columns = [
             "comment_id", 
             "book_id", 
@@ -15,7 +15,8 @@ class Comments:
             self.connection, 
             './data/comments.csv', 
             self.columns, 
-            'Comments'
+            'Comments',
+            fill=fill
         )
 
     def add(self, comment_data):

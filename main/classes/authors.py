@@ -1,7 +1,7 @@
 from main.utils.get_data import fill_table
 
 class Authors:
-    def __init__(self, connection):
+    def __init__(self, connection, fill=False):
         self.columns = [
             "author_id", 
             "author_name", 
@@ -15,7 +15,8 @@ class Authors:
             self.connection, 
             './data/authors_countries.csv', 
             self.columns, 
-            'Authors'
+            'Authors',
+            fill=fill
         )
 
     def add(self, author_data):

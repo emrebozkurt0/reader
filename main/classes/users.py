@@ -1,7 +1,8 @@
+from textwrap import fill
 from main.utils.get_data import fill_table
 
 class Users:
-    def __init__(self, connection):
+    def __init__(self, connection, fill=False):
         self.columns = [
             "user_id", 
             "name", 
@@ -17,7 +18,8 @@ class Users:
             self.connection, 
             './data/users_subscription.csv', 
             self.columns, 
-            'Users'
+            'Users',
+            fill=fill
         )
 
     def add(self, data):

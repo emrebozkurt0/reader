@@ -2,11 +2,11 @@ from main.utils.get_data import fill_table
 
 
 class Publishers:
-    def __init__(self, connection):
+    def __init__(self, connection, fill=False):
         self.columns = ["publisher_id", "publisher_name"]
         self.connection = connection
         fill_table(
-            self.connection, "./data/book_and_details.csv", self.columns, "Publishers"
+            self.connection, "./data/book_and_details.csv", self.columns, "Publishers", fill=fill
         )
 
     def add(self, data):

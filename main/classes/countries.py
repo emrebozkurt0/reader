@@ -1,7 +1,7 @@
 from main.utils.get_data import fill_table
 
 class Countries:
-    def __init__(self, connection):
+    def __init__(self, connection, fill=False):
         self.columns = [
             "country_id", 
             "country_name",
@@ -12,7 +12,8 @@ class Countries:
             self.connection, 
             './data/authors_countries.csv', 
             self.columns, 
-            'Countries'
+            'Countries',
+            fill=fill
         )
 
 
