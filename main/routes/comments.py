@@ -3,6 +3,7 @@ from main.classes.comments import Comments
 from main.utils.get_data import get_table_data
 from main.utils.database import get_connection
 from main.utils.decorators import login_required
+from datetime import datetime
 
 comments_bp = Blueprint('comments', __name__)
 
@@ -19,8 +20,9 @@ def add_comment():
         data = {
             "user_id": request.form["user_id"],
             "book_id": request.form["book_id"],
-            "content": request.form["comment_text"],
+            "content": request.form["content"],
             "score": request.form["score"],
+            "comment_datetime": datetime.now().strftime("%Y-%m-%d %H:%M:00"),
         }
         try:
             connection = get_connection()
@@ -44,7 +46,7 @@ def update_comment(id):
         try:
             connection = get_connection()
             comment = Comments(connection)
-            comment.update(data, id)
+            comment.update(id, data)
             return redirect(url_for("comments.comments"))
         except Exception as e:
             return f"Error occurred while updating the comment: {e}", 500

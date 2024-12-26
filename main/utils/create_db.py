@@ -45,8 +45,9 @@ def initialize_database(connection):
 
         sql_files = [
             './table_queries/users_subscription.sql',
-            './table_queries/authors_countries_comments.sql',
-            './table_queries/books_bookdetails_publishers.sql'
+            './table_queries/authors_countries.sql',
+            './table_queries/books_bookdetails_publishers.sql',
+            './table_queries/comments.sql',
         ]
         for sql_file in sql_files:
             execute_scripts_from_file(cursor, sql_file)
@@ -61,11 +62,11 @@ def initialize_database(connection):
 def fill_tables(connection):
     try:
         Users(connection)
-        Comments(connection)
-        Publishers(connection)
         Countries(connection)
         Authors(connection)
+        Publishers(connection)
         Books(connection)
+        Comments(connection)
 
     except mysql.connector.Error as err:
         print(f"Error while filling comments table: {err}")

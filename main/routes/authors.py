@@ -47,7 +47,7 @@ def update_author(id):
         try:
             connection = get_connection()
             author = Authors(connection)
-            author.update(data, id)
+            author.update(id, data)
             return redirect(url_for("authors.authors"))
         except Exception as e:
             return f"Error occurred while updating the author: {e}", 500

@@ -39,25 +39,25 @@ class Authors:
         except Exception as e:
             print(f"Error adding author: {e}")
 
-    def update(self, author_id, updates):
+    def update(self, author_id, data):
         try:
             cursor = self.connection.cursor()
 
-            update_clauses = ', '.join([f"{col} = %s" for col in updates.keys()])
-            query = f"UPDATE Authors SET {update_clauses} WHERE author_id = %s"
-            values = list(updates.values()) + [author_id]
+            update_clauses = ', '.join([f"{col} = %s" for col in data.keys()])
+            query = f"UPDATE authors SET {update_clauses} WHERE author_id = %s"
+            values = list(data.values()) + [author_id]
 
             cursor.execute(query, values)
             self.connection.commit()
             cursor.close()
-            print(f"Author {author_id} updated with: {updates}")
+            print(f"Author {author_id} updated with: {data}")
         except Exception as e:
             print(f"Error updating author {author_id}: {e}")
 
     def delete(self, author_id):
         try:
             cursor = self.connection.cursor()
-            query = "DELETE FROM Authors WHERE author_id = %s"
+            query = "DELETE FROM authors WHERE author_id = %s"
             cursor.execute(query, (author_id,))
             self.connection.commit()
             cursor.close()
@@ -131,3 +131,21 @@ class Authors:
         except Exception as e:
             print(f"Error filtering authors by country_id: {e}")
             return []
+
+    def get_by_id(self, id):
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT * FROM authors WHERE author_id = %s", (id,))
+        result = cursor.fetchone()
+        cursor.close()
+        if result:
+            return {
+                "author_id": result[0],
+                "author_name": result[1],
+                "gender": result[2],
+                "about": result[3],
+                "img_url": result[4],
+                "country_id": result[5],
+            }
+        else:
+            return None
+    

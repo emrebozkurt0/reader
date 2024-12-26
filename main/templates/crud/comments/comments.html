@@ -2,6 +2,7 @@
 {% block header %}Comments{% endblock %} {% block add %}comments/add{% endblock
 %} {% block add_title %}Add Comment{% endblock %} {% block headers %}
 <th scope="col">Comment ID</th>
+<th scope="col">Book ID</th>
 <th scope="col">Comment Datetime</th>
 <th scope="col">User ID</th>
 <th scope="col">Content</th>
@@ -14,6 +15,7 @@
   <td>{{ comment[2] }}</td>
   <td>{{ comment[3] }}</td>
   <td>{{ comment[4] }}</td>
+  <td>{{ comment[5] }}</td>
   <td>
     <button class="btn btn-primary" onclick="location.href='/comments/update/{{ comment[0] }}'">Update</button>
     <form action="/comments/delete/{{ comment[0] }}" method="POST" style="display:inline;" onsubmit="return confirmDelete()">

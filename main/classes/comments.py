@@ -4,6 +4,7 @@ class Comments:
     def __init__(self, connection):
         self.columns = [
             "comment_id", 
+            "book_id", 
             "comment_datetime", 
             "user_id", 
             "content", 
@@ -21,7 +22,12 @@ class Comments:
         try:
             cursor = self.connection.cursor()
 
-            required_fields = ['user_id', 'content']
+            required_fields = ['user_id', 'content', 'book_id']
+            
+            cursor.execute("SELECT COUNT(*) FROM Books WHERE book_id = %s", (comment_data['book_id'],))
+            if cursor.fetchone()[0] == 0:
+                raise ValueError(f"book_id {comment_data['book_id']} does not exist in the Books table.")
+
             for field in required_fields:
                 if field not in comment_data or not comment_data[field]:
                     raise ValueError(f"Missing or invalid field: {field}")
@@ -128,3 +134,20 @@ class Comments:
         except Exception as e:
             print(f"Error retrieving top comments: {e}")
             return []
+
+    def get_by_id(self, id):
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT * FROM comments WHERE comment_id = %s", (id,))
+        result = cursor.fetchone()
+        cursor.close()
+        if result:
+            return {
+                "comment_id": result[0],
+                "book_id": result[1],
+                "comment_datetime": result[2],
+                "user_id": result[3],
+                "content": result[4],
+                "score": result[5],
+            }
+        else:
+            return None
