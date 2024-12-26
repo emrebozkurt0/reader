@@ -46,8 +46,18 @@ class Users:
 
     def update(self,data,id):
         cursor = self.connection.cursor()
-        query = f"UPDATE users SET name = %s WHERE user_id = %s"
-        values = (data["name"], id)
+        query = f"""
+        UPDATE users SET name = %s, email = %s, username = %s, date_of_birth = %s, gender = %s, subscription_id = %s WHERE user_id = %s
+        """
+        values = (
+            data["name"],
+            data["email"],
+            data["username"],
+            data["date_of_birth"],
+            data["gender"],
+            data["subscription_id"],
+            id
+        )
         try:
             cursor.execute(query, values)
             self.connection.commit()
@@ -74,5 +84,23 @@ class Users:
 
     def filter(self):
         pass
+
+    def get_by_id(self, id):
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT * FROM users WHERE user_id = %s", (id,))
+        result = cursor.fetchone()
+        cursor.close()
+        if result:
+            return {
+                "user_id": result[0],
+                "name": result[1],
+                "email": result[2],
+                "username": result[3],
+                "date_of_birth": result[5],
+                "gender": result[6],
+                "subscription_id": result[7],
+            }
+        else:
+            return None
 
     
