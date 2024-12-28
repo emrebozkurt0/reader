@@ -60,7 +60,7 @@
 </th>
 <th scope="col">
   <a href="{{ url_for('users.users', sort='subscription_id', order=next_order) }}">
-    Subscription ID {% if sort_column == 'subscription_id' %} 
+    Subscription Plan {% if sort_column == 'subscription_id' %} 
       {% if current_order == 'asc' %} ▲ 
       {% elif current_order == 'desc' %} ▼ 
       {% endif %} 
@@ -78,10 +78,10 @@
   <td style="white-space: nowrap;">{{ user[1] }}</td>
   <td>{{ user[2] }}</td>
   <td>{{ user[3] }}</td>
-  <td style="white-space:nowrap;">{{ user[5] }}</td>
+  <td style="white-space:nowrap;">{{ user[4] }}</td>
+  <td>{{ user[5] }}</td>
   <td>{{ user[6] }}</td>
-  <td>{{ user[7] }}</td>
-  <td>{{ 'Admin' if user[8] == 1 else 'User' }}</td>
+  <td>{{ 'Admin' if user[7] == 1 else 'User' }}</td>
   <td>
     <div class="d-flex justify-content-start gap-1">
       <button class="btn btn-primary w-100" onclick="location.href='/users/update/{{ user[0] }}'">Update</button>

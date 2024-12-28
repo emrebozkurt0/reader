@@ -16,6 +16,21 @@ def get_mysql_data_types(column_type):
     
     return mysql_types.get(column_type, 'UNKNOWN')
 
+def get_join_data(join_query=None, sort_column=None):
+    connection = get_connection()
+    cursor = connection.cursor()
+    
+    try:
+        if sort_column:
+            join_query += f" ORDER BY {sort_column}"
+        
+        cursor.execute(join_query)
+        data = cursor.fetchall()
+        return data
+    finally:
+        cursor.close()
+        connection.close()
+
 def get_table_data(table_name, sort_column=None):
     connection = get_connection()
     cursor = connection.cursor()

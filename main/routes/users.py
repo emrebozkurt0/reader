@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from main.classes.users import Users
-from main.utils.get_data import get_table_data
+from main.utils.get_data import get_table_data, get_join_data
 from main.utils.database import get_connection
 from main.utils.decorators import login_required
 
@@ -13,22 +13,38 @@ def users():
     current_order = request.args.get("order", default="asc")
     next_order = "desc" if current_order == "asc" else ("unsorted" if current_order == "desc" else "asc")
     try:
-        connection = get_connection()
+        join_query = """
+            SELECT 
+                u.user_id, 
+                u.name, 
+                u.email, 
+                u.username, 
+                u.date_of_birth, 
+                u.gender, 
+                s.subscription_plan, 
+                u.role
+            FROM 
+                Users u
+            LEFT JOIN 
+                Subscriptions s
+            ON 
+                u.subscription_id = s.subscription_id
+        """
+        
         if sort_column and current_order != "unsorted":
-            users = get_table_data("Users", sort_column=f"{sort_column} {current_order.upper()}")
-        else:
-            users = get_table_data("Users")
-        subscriptions = get_table_data("Subscriptions")
+            sort_column = f"{sort_column} {current_order.upper()}"
+
+        users = get_join_data(join_query, sort_column)
+        
         return render_template(
             "/crud/users/users.html",
             users=users,
-            subscriptions=subscriptions,
             sort_column=sort_column,
             current_order=current_order,
             next_order=next_order,
         )
     except Exception as e:
-        return f"Error occurred while fetching the books: {e}", 500
+        return f"Error occurred while fetching the users: {e}", 500
 
 @users_bp.route("/users/add", methods=["GET", "POST"])
 @login_required
