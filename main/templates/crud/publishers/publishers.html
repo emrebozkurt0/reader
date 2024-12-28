@@ -8,21 +8,23 @@ endblock %} {% block add_title %}Add Publisher{% endblock %} {% block headers %}
 <tr>
   <td>{{ publisher[0] }}</td>
   <td>{{ publisher[1] }}</td>
-  <td class="d-flex justify-content-start gap-3">
-    <button
-      class="btn btn-primary"
-      onclick="location.href='/publishers/update/{{ publisher[0] }}'"
-    >
-      Update
-    </button>
-    <form
-      action="/publishers/delete/{{ publisher[0] }}"
-      method="POST"
-      style="display: inline"
-      onsubmit="return confirmDelete()"
-    >
-      <button type="submit" class="btn btn-danger">Delete</button>
-    </form>
+  <td>
+    <div class="d-flex justify-content-start gap-1">
+      <button
+        class="btn btn-primary"
+        onclick="location.href='/publishers/update/{{ publisher[0] }}'"
+      >
+        Update
+      </button>
+      <form
+        action="/publishers/delete/{{ publisher[0] }}"
+        method="POST"
+        style="display: inline"
+        onsubmit="return confirmDelete()"
+      >
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </form>
+    </div>
   </td>
 </tr>
 {% endfor %} {% endblock %} {% block scripts %}

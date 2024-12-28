@@ -17,10 +17,12 @@
   <td>{{ comment[4] }}</td>
   <td>{{ comment[5] }}</td>
   <td>
-    <button class="btn btn-primary" onclick="location.href='/comments/update/{{ comment[0] }}'">Update</button>
-    <form action="/comments/delete/{{ comment[0] }}" method="POST" style="display:inline;" onsubmit="return confirmDelete()">
-      <button type="submit" class="btn btn-danger">Delete</button>
-    </form>
+      <div class="d-flex justify-content-start gap-1">
+        <button class="btn btn-primary w-100" onclick="location.href='/comments/update/{{ comment[0] }}'">Update</button>
+        <form action="/comments/delete/{{ comment[0] }}" method="POST" style="display:inline;" onsubmit="return confirmDelete()">
+        <button type="submit" class="btn btn-danger w-100">Delete</button>
+        </form>
+      </div>
   </td>
 </tr>
 {% endfor %} {% endblock %}

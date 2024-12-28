@@ -8,14 +8,18 @@
     >{%block add_title%}{%endblock%}</a
   >
 </div>
-<table class="table col-12">
-  <thead>
-    <tr>
-      {%block headers%}{%endblock%}
-    </tr>
-  </thead>
-  <tbody>
-    {%block rows%}{%endblock%}
-  </tbody>
-</table>
+<div id="table-wrapper">
+  <div id="table-scroll">
+    <table class="table col-12">
+      <thead>
+        <tr>
+          {%block headers%}{%endblock%}
+        </tr>
+      </thead>
+      <tbody>
+        {%block rows%}{%endblock%}
+      </tbody>
+    </table>
+  </div>
+</div>
 {% endblock %}

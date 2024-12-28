@@ -1,7 +1,6 @@
 {% extends "/crud/crud_layout.html" %} {% block title %} Authors {% endblock %}
 {%block header%}Authors{%endblock%} {%block add%}authors/add{%endblock%} {%block
-add_title%}Add Author{%endblock%} 
-{%block headers%}
+add_title%}Add Author{%endblock%} {%block headers%}
 <th scope="col">Author Id</th>
 <th scope="col">Name</th>
 <th scope="col">Gender</th>
@@ -17,19 +16,27 @@ add_title%}Add Author{%endblock%}
   <td>{{author[3]}}</td>
   <td>{{author[4]}}</td>
   <td>{{author[5]}}</td>
-  <td>
-    <button class="btn btn-primary" onclick="location.href='/authors/update/{{ author[0] }}'">Update</button>
-    <form action="/authors/delete/{{ author[0] }}" method="POST" style="display:inline;" onsubmit="return confirmDelete()">
-      <button type="submit" class="btn btn-danger">Delete</button>
+  <td class="d-flex flex-column gap-1">
+    <button
+      class="btn btn-primary w-100"
+      onclick="location.href='/authors/update/{{ author[0] }}'"
+    >
+      Update
+    </button>
+    <form
+      action="/authors/delete/{{ author[0] }}"
+      method="POST"
+      style="display: inline"
+      onsubmit="return confirmDelete()"
+    >
+      <button type="submit" class="btn btn-danger w-100">Delete</button>
     </form>
   </td>
 </tr>
-{%endfor%} {%endblock%}
-
-{% block scripts %}
+{%endfor%} {%endblock%} {% block scripts %}
 <script>
-function confirmDelete() {
+  function confirmDelete() {
     return confirm("Are you sure you want to delete this author?");
-}
+  }
 </script>
 {% endblock %}
