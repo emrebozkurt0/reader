@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for,flash
 from main.classes.books import Books
 from main.utils.get_data import *
 from main.utils.database import get_connection
@@ -49,6 +49,7 @@ def add_book():
             connection = get_connection()
             book = Books(connection)
             book.add(data)
+            flash("Book added successfully.","success")
             return redirect(url_for("books.books"))
         except Exception as e:
             return f"Error occurred while adding the book: {e}", 500
@@ -68,6 +69,7 @@ def update_book(id):
             connection = get_connection()
             book = Books(connection)
             book.update(data,id)
+            flash("Book updated successfully.","success")
             return redirect(url_for("books.books"))
         except Exception as e:
             return f"Error occurred while updating the book: {e}", 500
@@ -86,6 +88,7 @@ def delete_book(id):
         connection = get_connection()
         book = Books(connection)
         book.delete(id)
+        flash("Book deleted successfully.","success")
         return redirect(url_for("books.books"))
     except Exception as e:
         return f"Error occurred while deleting the book: {e}", 500
