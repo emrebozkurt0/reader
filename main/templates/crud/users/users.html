@@ -41,8 +41,8 @@
   </a>
 </th>
 <th scope="col">
-  <a href="{{ url_for('users.users', sort='birth_date', order=next_order) }}">
-    Birth Date {% if sort_column == 'birth_date' %} 
+  <a href="{{ url_for('users.users', sort='date_of_birth', order=next_order) }}">
+    Birth Date {% if sort_column == 'date_of_birth' %} 
       {% if current_order == 'asc' %} ▲ 
       {% elif current_order == 'desc' %} ▼ 
       {% endif %} 
