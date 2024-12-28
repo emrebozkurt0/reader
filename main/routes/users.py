@@ -24,6 +24,7 @@ def add_user():
             "date_of_birth": request.form["date_of_birth"],
             "gender": request.form["gender"],
             "subscription_id": request.form["subscription_id"],
+            "role": request.form["role"]
         }
         try:
             connection = get_connection()
@@ -45,6 +46,7 @@ def update_user(id):
             "date_of_birth": request.form["date_of_birth"],
             "gender": request.form["gender"],
             "subscription_id": request.form["subscription_id"],
+            "role": request.form["role"]
         }
         try:
             connection = get_connection()
