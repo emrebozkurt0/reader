@@ -61,7 +61,7 @@
             />
           </div>
           {% if msg %}
-          <div class="alert alert-danger text-center small" role="alert">
+          <div class="alert alert-{{ msg_type }} text-center small" role="alert">
             {{ msg }}
           </div>
           {% endif %}
@@ -69,9 +69,7 @@
         </form>
         <p class="text-center mt-3 small">
           Already have an account?
-          <a href="{{ url_for('auth.login') }}" class="text-success"
-            >Sign In here</a
-          >
+          <a href="{{ url_for('auth.login') }}" class="text-success">Sign In here</a>
         </p>
       </div>
     </div>

@@ -11,6 +11,7 @@ class Users:
             "date_of_birth", 
             "gender", 
             "subscription_id", 
+            "role",
             "password"
         ]
         self.connection = connection
@@ -26,7 +27,7 @@ class Users:
         cursor = self.connection.cursor()
         query = f"""
             INSERT INTO users ({', '.join(self.columns[1:-1])})
-            VALUES (%s, %s, %s, %s, %s, %s)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
         """
         values = (
             data["name"],
@@ -34,7 +35,8 @@ class Users:
             data["username"],
             data["date_of_birth"],
             data["gender"],
-            data["subscription_id"]
+            data["subscription_id"],
+            data["role"]
         )
         try:
             cursor.execute(query, values)
@@ -49,7 +51,7 @@ class Users:
     def update(self,data,id):
         cursor = self.connection.cursor()
         query = f"""
-        UPDATE users SET name = %s, email = %s, username = %s, date_of_birth = %s, gender = %s, subscription_id = %s WHERE user_id = %s
+        UPDATE users SET name = %s, email = %s, username = %s, date_of_birth = %s, gender = %s, subscription_id = %s, role = %s WHERE user_id = %s
         """
         values = (
             data["name"],
@@ -58,6 +60,7 @@ class Users:
             data["date_of_birth"],
             data["gender"],
             data["subscription_id"],
+            data["role"],
             id
         )
         try:
@@ -101,6 +104,7 @@ class Users:
                 "date_of_birth": result[5],
                 "gender": result[6],
                 "subscription_id": result[7],
+                "role": result[8]
             }
         else:
             return None
