@@ -15,8 +15,34 @@
     />
     <title>{% block title %} {% endblock %}</title>
     <style>
-      td{
+      td {
         vertical-align: middle;
+      }
+      th {
+        white-space: nowrap;
+      }
+      a{
+        text-decoration: none;
+        color: inherit;
+      }
+      #table-wrapper {
+        position: relative;
+      }
+      #table-scroll {
+        height: auto;
+        overflow: auto;
+        margin-top: 20px;
+      }
+      #table-wrapper table {
+        width: 100%;
+      }
+      #table-wrapper table thead th .text {
+        position: absolute;
+        top: -20px;
+        z-index: 2;
+        height: 20px;
+        width: 35%;
+        border: 1px solid red;
       }
     </style>
   </head>

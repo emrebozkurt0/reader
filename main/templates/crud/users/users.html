@@ -1,38 +1,102 @@
-{% extends "/crud/crud_layout.html" %} {% block title %} Users {% endblock %}
-{%block add%}users/add{%endblock%} {%block add_title%}Add User{%endblock%}
-{%block header%}Users{%endblock%} {%block headers%}
-<th scope="col">User Id</th>
-<th scope="col">Name</th>
-<th scope="col">Email</th>
-<th scope="col">Username</th>
-<th scope="col">Birth Date</th>
-<th scope="col">Gender</th>
-<th scope="col">Subscription Id</th>
+{% extends "/crud/crud_layout.html" %}
+{% block title %} Users {% endblock %}
+{% block add %}users/add{% endblock %}
+{% block add_title %}Add User{% endblock %}
+{% block header %}Users{% endblock %}
+{% block headers %}
+<th scope="col">
+  <a href="{{ url_for('users.users', sort='user_id', order=next_order) }}">
+    User ID {% if sort_column == 'user_id' %} 
+      {% if current_order == 'asc' %} ▲ 
+      {% elif current_order == 'desc' %} ▼ 
+      {% endif %} 
+    {% endif %}
+  </a>
+</th>
+<th scope="col">
+  <a href="{{ url_for('users.users', sort='name', order=next_order) }}">
+    Name {% if sort_column == 'name' %} 
+      {% if current_order == 'asc' %} ▲ 
+      {% elif current_order == 'desc' %} ▼ 
+      {% endif %} 
+    {% endif %}
+  </a>
+</th>
+<th scope="col">
+  <a href="{{ url_for('users.users', sort='email', order=next_order) }}">
+    Email {% if sort_column == 'email' %} 
+      {% if current_order == 'asc' %} ▲ 
+      {% elif current_order == 'desc' %} ▼ 
+      {% endif %} 
+    {% endif %}
+  </a>
+</th>
+<th scope="col">
+  <a href="{{ url_for('users.users', sort='username', order=next_order) }}">
+    Username {% if sort_column == 'username' %} 
+      {% if current_order == 'asc' %} ▲ 
+      {% elif current_order == 'desc' %} ▼ 
+      {% endif %} 
+    {% endif %}
+  </a>
+</th>
+<th scope="col">
+  <a href="{{ url_for('users.users', sort='birth_date', order=next_order) }}">
+    Birth Date {% if sort_column == 'birth_date' %} 
+      {% if current_order == 'asc' %} ▲ 
+      {% elif current_order == 'desc' %} ▼ 
+      {% endif %} 
+    {% endif %}
+  </a>
+</th>
+<th scope="col">
+  <a href="{{ url_for('users.users', sort='gender', order=next_order) }}">
+    Gender {% if sort_column == 'gender' %} 
+      {% if current_order == 'asc' %} ▲ 
+      {% elif current_order == 'desc' %} ▼ 
+      {% endif %} 
+    {% endif %}
+  </a>
+</th>
+<th scope="col">
+  <a href="{{ url_for('users.users', sort='subscription_id', order=next_order) }}">
+    Subscription ID {% if sort_column == 'subscription_id' %} 
+      {% if current_order == 'asc' %} ▲ 
+      {% elif current_order == 'desc' %} ▼ 
+      {% endif %} 
+    {% endif %}
+  </a>
+</th>
 <th scope="col">Role</th>
 <th scope="col">Operations</th>
-{%endblock%} {%block rows%} {%for user in users%}
+{% endblock %}
+{% block rows %}
+{% for user in users %}
 <tr>
-  <td>{{user[0]}}</td>
-  <td>{{user[1]}}</td>
-  <td>{{user[2]}}</td>
-  <td>{{user[3]}}</td>
-  <td>{{user[5]}}</td>
-  <td>{{user[6]}}</td>
-  <td>{{user[7]}}</td>
+
+  <td>{{ user[0] }}</td>
+  <td>{{ user[1] }}</td>
+  <td>{{ user[2] }}</td>
+  <td>{{ user[3] }}</td>
+  <td>{{ user[5] }}</td>
+  <td>{{ user[6] }}</td>
+  <td>{{ user[7] }}</td>
   <td>{{ 'Admin' if user[8] == 1 else 'User' }}</td>
-  <td class="d-flex justify-content-start gap-3">
-    <button class="btn btn-primary"onclick="location.href='/users/update/{{ user[0] }}'">Update</button>
-    <form
-      action="/users/delete/{{ user[0] }}" method="POST" style="display: inline" onsubmit="return confirmDelete()">
-      <button type="submit" class="btn btn-danger">Delete</button>
-    </form>
+  <td>
+    <div class="d-flex justify-content-start gap-1">
+      <button class="btn btn-primary w-100" onclick="location.href='/users/update/{{ user[0] }}'">Update</button>
+      <form action="/users/delete/{{ user[0] }}" method="POST" style="display:inline;" onsubmit="return confirmDelete()">
+        <button type="submit" class="btn btn-danger w-100">Delete</button>
+      </form>
+    </div>
   </td>
 </tr>
-{%endfor%} {% endblock %}
+{% endfor %}
+{% endblock %}
 {% block scripts %}
 <script>
-  function confirmDelete() {
+function confirmDelete() {
     return confirm("Are you sure you want to delete this user?");
-  }
+}
 </script>
 {% endblock %}
