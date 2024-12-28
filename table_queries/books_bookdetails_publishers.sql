@@ -21,12 +21,12 @@ CREATE TABLE Books (
     
     FOREIGN KEY (author_id)
 		REFERENCES Authors (author_id)
-		ON DELETE SET NULL
+		ON DELETE CASCADE
         ON UPDATE CASCADE,
     
     FOREIGN KEY (publisher_id)
         REFERENCES Publishers (publisher_id)
-        ON DELETE SET NULL
+        ON DELETE CASCADE
         ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 

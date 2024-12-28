@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for,flash
 from main.classes.comments import Comments
 from main.utils.get_data import get_table_data
 from main.utils.database import get_connection
@@ -28,6 +28,7 @@ def add_comment():
             connection = get_connection()
             comment = Comments(connection)
             comment.add(data)
+            flash("Comment added successfully.","success")
             return redirect(url_for("comments.comments"))
         except Exception as e:
             return f"Error occurred while adding the comment: {e}", 500
@@ -47,6 +48,7 @@ def update_comment(id):
             connection = get_connection()
             comment = Comments(connection)
             comment.update(id, data)
+            flash("Comment updated successfully.","success")
             return redirect(url_for("comments.comments"))
         except Exception as e:
             return f"Error occurred while updating the comment: {e}", 500
@@ -67,6 +69,7 @@ def delete_comment(id):
         connection = get_connection()
         comment = Comments(connection)
         comment.delete(id)
+        flash("Comment deleted successfully.","success")
         return redirect(url_for("comments.comments"))
     except Exception as e:
         return f"Error occurred while deleting the comment: {e}", 500

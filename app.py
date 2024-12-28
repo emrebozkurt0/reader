@@ -2,11 +2,14 @@ from flask import Flask, session
 from main.routes import register_routes
 import os
 from datetime import timedelta
+from flask_toastr import Toastr
 
 app = Flask(__name__, template_folder="./main/templates", static_folder="./main/static", static_url_path="/static")
 
 app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY', 'fallback-key-for-development')
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=15)
+
+toastr = Toastr(app)
 
 @app.before_request
 def refresh_session():
