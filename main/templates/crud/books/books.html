@@ -48,21 +48,24 @@ block add_title %}Add Book{% endblock %} {% block headers %}
   <td>{{ book[3] }}</td>
   <td>{{ book[4] }}</td>
   <td>{{ book[5] }}</td>
-  <td class="d-flex flex-column gap-1">
-    <button
-      class="btn btn-primary w-100"
-      onclick="location.href='/books/update/{{ book[0] }}'"
-    >
-      Update
-    </button>
-    <form
-      action="/books/delete/{{ book[0] }}"
-      method="POST"
-      style="display: inline"
-      onsubmit="return confirmDelete()"
-    >
-      <button type="submit" class="btn btn-danger w-100">Delete</button>
-    </form>
+  <td>
+    <div class="d-flex gap-1">
+      <button
+        class="btn btn-primary w-100"
+        onclick="location.href='/books/update/{{ book[0] }}'"
+      >
+        Update
+      </button>
+      <form
+        action="/books/delete/{{ book[0] }}"
+        method="POST"
+        style="display: inline"
+        onsubmit="return confirmDelete()"
+        class="w-50"
+      >
+        <button type="submit" class="btn btn-danger w-100">Delete</button>
+      </form>
+    </div>
   </td>
 </tr>
 {% endfor %} {% endblock %} {% block scripts %}
