@@ -9,9 +9,30 @@ books_bp = Blueprint('books', __name__)
 @books_bp.route("/books")
 @login_required
 def books():
-    books = get_table_data("Books")
-    bookDetails = get_table_data("BookDetails")
-    return render_template("/crud/books/books.html", books=books, bookDetails=bookDetails)
+    sort_column = request.args.get("sort", default=None)
+    current_order = request.args.get("order", default="asc")
+    next_order = "desc" if current_order == "asc" else ("unsorted" if current_order == "desc" else "asc")
+
+    try:
+        connection = get_connection()
+        if sort_column and current_order != "unsorted":
+            books = get_table_data("Books", sort_column=f"{sort_column} {current_order.upper()}")
+        else:
+            books = get_table_data("Books")
+        bookDetails = get_table_data("BookDetails")
+
+        return render_template(
+            "/crud/books/books.html",
+            books=books,
+            bookDetails=bookDetails,
+            sort_column=sort_column,
+            current_order=current_order,
+            next_order=next_order,
+        )
+    except Exception as e:
+        return f"Error occurred while fetching the books: {e}", 500
+
+
 
 @books_bp.route("/books/add", methods=["GET", "POST"])
 @login_required

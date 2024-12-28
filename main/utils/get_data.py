@@ -16,22 +16,22 @@ def get_mysql_data_types(column_type):
     
     return mysql_types.get(column_type, 'UNKNOWN')
 
-def get_table_data(table_name):
+def get_table_data(table_name, sort_column=None):
     connection = get_connection()
     cursor = connection.cursor()
-    cursor.execute(f"SELECT * FROM {table_name}")
-    columns = cursor.description
-    centers = cursor.fetchall()
-    cursor.close()
-    connection.close()
-    column_types = []
-    for column in columns: 
-        column_name = column[0]
-        column_type = column[1]
-        mysql_data_type = get_mysql_data_types(column_type)
-        item = {'column_name': column_name, 'column_type': mysql_data_type}
-        column_types.append(item)
-    return centers 
+    
+    try:
+        query = f"SELECT * FROM {table_name}"
+        if sort_column:
+            query += f" ORDER BY {sort_column}"
+        
+        cursor.execute(query)
+        centers = cursor.fetchall()
+        return centers
+    finally:
+        cursor.close()
+        connection.close()
+
 
 def fill_table(connection, file_path, column_names, table_name, fill=True):
     if (fill):

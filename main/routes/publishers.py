@@ -10,8 +10,31 @@ publishers_bp = Blueprint("publishers", __name__)
 @publishers_bp.route("/publishers")
 @login_required
 def publishers():
-    publishers = get_table_data("Publishers")
-    return render_template("/crud/publishers/publishers.html", publishers=publishers)
+    sort_column = request.args.get("sort", default=None)
+    current_order = request.args.get("order", default="asc")
+    next_order = (
+        "desc"
+        if current_order == "asc"
+        else ("unsorted" if current_order == "desc" else "asc")
+    )
+    try:
+        connection = get_connection()
+        if sort_column and current_order != "unsorted":
+            publishers = get_table_data(
+                "Publishers", sort_column=f"{sort_column} {current_order.upper()}"
+            )
+        else:
+            publishers = get_table_data("Publishers")
+
+        return render_template(
+            "/crud/publishers/publishers.html",
+            publishers=publishers,
+            sort_column=sort_column,
+            current_order=current_order,
+            next_order=next_order,
+        )
+    except Exception as e:
+        return f"Error occurred while fetching the publishers: {e}", 500
 
 
 @publishers_bp.route("/publishers/add", methods=["GET", "POST"])
@@ -41,7 +64,7 @@ def update_publisher(id):
         try:
             connection = get_connection()
             publisher = Publishers(connection)
-            publisher.update(data,id)
+            publisher.update(data, id)
             return redirect(url_for("publishers.publishers"))
         except Exception as e:
             return f"Error occurred while updating the publisher: {e}", 500

@@ -1,21 +1,74 @@
-{% extends "/crud/crud_layout.html" %} {% block title %} Authors {% endblock %}
-{%block header%}Authors{%endblock%} {%block add%}authors/add{%endblock%} {%block
-add_title%}Add Author{%endblock%} {%block headers%}
-<th scope="col">Author Id</th>
-<th scope="col">Name</th>
-<th scope="col">Gender</th>
-<th scope="col">About</th>
-<th scope="col">Image URL</th>
-<th scope="col">Country Id</th>
+{% extends "/crud/crud_layout.html" %}
+{% block title %} Authors {% endblock %}
+{% block header %}Authors{% endblock %}
+{% block add %}authors/add{% endblock %}
+{% block add_title %}Add Author{% endblock %}
+{% block headers %}
+<th scope="col">
+  <a href="{{ url_for('authors.authors', sort='author_id', order=next_order) }}">
+    Author Id {% if sort_column == 'author_id' %} 
+      {% if current_order == 'asc' %} ▲ 
+      {% elif current_order == 'desc' %} ▼ 
+      {% endif %} 
+    {% endif %}
+  </a>
+</th>
+<th scope="col">
+  <a href="{{ url_for('authors.authors', sort='author_name', order=next_order) }}">
+    Name {% if sort_column == 'author_name' %} 
+      {% if current_order == 'asc' %} ▲ 
+      {% elif current_order == 'desc' %} ▼ 
+      {% endif %} 
+    {% endif %}
+  </a>
+</th>
+<th scope="col">
+  <a href="{{ url_for('authors.authors', sort='gender', order=next_order) }}">
+    Gender {% if sort_column == 'gender' %} 
+      {% if current_order == 'asc' %} ▲ 
+      {% elif current_order == 'desc' %} ▼ 
+      {% endif %} 
+    {% endif %}
+  </a>
+</th>
+<th scope="col">
+  <a href="{{ url_for('authors.authors', sort='about', order=next_order) }}">
+    About {% if sort_column == 'about' %} 
+      {% if current_order == 'asc' %} ▲ 
+      {% elif current_order == 'desc' %} ▼ 
+      {% endif %} 
+    {% endif %}
+  </a>
+</th>
+<th scope="col">
+  <a href="{{ url_for('authors.authors', sort='image_url', order=next_order) }}">
+    Image URL {% if sort_column == 'image_url' %} 
+      {% if current_order == 'asc' %} ▲ 
+      {% elif current_order == 'desc' %} ▼ 
+      {% endif %} 
+    {% endif %}
+  </a>
+</th>
+<th scope="col">
+  <a href="{{ url_for('authors.authors', sort='country_id', order=next_order) }}">
+    Country Id {% if sort_column == 'country_id' %} 
+      {% if current_order == 'asc' %} ▲ 
+      {% elif current_order == 'desc' %} ▼ 
+      {% endif %} 
+    {% endif %}
+  </a>
+</th>
 <th scope="col">Operations</th>
-{%endblock%} {%block rows%} {%for author in authors%}
+{% endblock %}
+{% block rows %}
+{% for author in authors %}
 <tr>
-  <td>{{author[0]}}</td>
-  <td>{{author[1]}}</td>
-  <td>{{author[2]}}</td>
-  <td>{{author[3]}}</td>
-  <td>{{author[4]}}</td>
-  <td>{{author[5]}}</td>
+  <td>{{ author[0] }}</td>
+  <td>{{ author[1] }}</td>
+  <td>{{ author[2] }}</td>
+  <td>{{ author[3] }}</td>
+  <td>{{ author[4] }}</td>
+  <td>{{ author[5] }}</td>
   <td class="d-flex flex-column gap-1">
     <button
       class="btn btn-primary w-100"
@@ -26,17 +79,19 @@ add_title%}Add Author{%endblock%} {%block headers%}
     <form
       action="/authors/delete/{{ author[0] }}"
       method="POST"
-      style="display: inline"
+      style="display:inline;"
       onsubmit="return confirmDelete()"
     >
       <button type="submit" class="btn btn-danger w-100">Delete</button>
     </form>
   </td>
 </tr>
-{%endfor%} {%endblock%} {% block scripts %}
+{% endfor %}
+{% endblock %}
+{% block scripts %}
 <script>
-  function confirmDelete() {
+function confirmDelete() {
     return confirm("Are you sure you want to delete this author?");
-  }
+}
 </script>
 {% endblock %}
