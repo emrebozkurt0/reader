@@ -67,6 +67,7 @@
     {% endif %}
   </a>
 </th>
+<th scope="col">Role</th>
 <th scope="col">Operations</th>
 {% endblock %}
 {% block rows %}
@@ -79,6 +80,7 @@
   <td>{{ user[5] }}</td>
   <td>{{ user[6] }}</td>
   <td>{{ user[7] }}</td>
+  <td>{{ 'Admin' if user[8] == 1 else 'User' }}</td>
   <td>
     <div class="d-flex justify-content-start gap-1">
       <button class="btn btn-primary w-100" onclick="location.href='/users/update/{{ user[0] }}'">Update</button>
