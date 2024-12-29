@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for,flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from main.classes.authors import Authors
 from main.utils.get_data import get_table_data
 from main.utils.database import get_connection
@@ -9,9 +9,28 @@ authors_bp = Blueprint('authors', __name__)
 @authors_bp.route("/authors")
 @login_required
 def authors():
-    authors = get_table_data("Authors")
-    countries = get_table_data("Countries")
-    return render_template("/crud/authors/authors.html", authors=authors, countries=countries)
+    sort_column = request.args.get("sort", default=None)
+    current_order = request.args.get("order", default="asc")
+    next_order = "desc" if current_order == "asc" else ("unsorted" if current_order == "desc" else "asc")
+
+    try:
+        connection = get_connection()
+        if sort_column and current_order != "unsorted":
+            authors = get_table_data("Authors", sort_column=f"{sort_column} {current_order.upper()}")
+        else:
+            authors = get_table_data("Authors")
+        countries = get_table_data("Countries")
+
+        return render_template(
+            "/crud/authors/authors.html",
+            authors=authors,
+            countries=countries,
+            sort_column=sort_column,
+            current_order=current_order,
+            next_order=next_order,
+        )
+    except Exception as e:
+        return f"Error occurred while fetching the authors: {e}", 500
 
 @authors_bp.route("/authors/add", methods=["GET", "POST"])
 @login_required
@@ -28,7 +47,7 @@ def add_author():
             connection = get_connection()
             author = Authors(connection)
             author.add(data)
-            flash("Author added successfully.","success")
+            flash("Author added successfully.", "success")
             return redirect(url_for("authors.authors"))
         except Exception as e:
             return f"Error occurred while adding the author: {e}", 500
@@ -49,7 +68,7 @@ def update_author(id):
             connection = get_connection()
             author = Authors(connection)
             author.update(id, data)
-            flash("Authoer updated successfully.","success")
+            flash("Author updated successfully.", "success")
             return redirect(url_for("authors.authors"))
         except Exception as e:
             return f"Error occurred while updating the author: {e}", 500
@@ -62,7 +81,6 @@ def update_author(id):
         except Exception as e:
             return f"Error occurred while fetching the author data: {e}", 500
 
-
 @authors_bp.route("/authors/delete/<int:id>", methods=["POST"])
 @login_required
 def delete_author(id):
@@ -70,7 +88,7 @@ def delete_author(id):
         connection = get_connection()
         author = Authors(connection)
         author.delete(id)
-        flash("Author deleted successfully.","success")
+        flash("Author deleted successfully.", "success")
         return redirect(url_for("authors.authors"))
     except Exception as e:
         return f"Error occurred while deleting the author: {e}", 500

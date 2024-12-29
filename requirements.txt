@@ -2,6 +2,7 @@ bcrypt==4.2.1
 blinker==1.9.0
 click==8.1.7
 Flask==3.0.3
+flask_toastr==0.5.8
 importlib_metadata==8.5.0
 itsdangerous==2.2.0
 Jinja2==3.1.4
