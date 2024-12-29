@@ -5,7 +5,7 @@
 <form action="{{ url_for('authors.search_authors') }}" method="POST" class="mb-3">
   <div class="row">
     <div class="col">
-      <input type="text" class="form-control" name="author_id" placeholder="Author">
+      <input type="text" class="form-control" name="author_id" placeholder="Author ID">
     </div>
     <div class="col">
       <input type="text" class="form-control" name="author_name" placeholder="Author Name">
@@ -20,7 +20,7 @@
       <input type="text" class="form-control" name="image_url" placeholder="Image">
     </div>
     <div class="col">
-      <input type="text" class="form-control" name="country_id" placeholder="Country ID">
+      <input type="text" class="form-control" name="country_name" placeholder="Country">
     </div>
     <div class="col">
       <button type="submit" class="btn btn-primary" style="width: 150px;">Search</button>
@@ -67,9 +67,9 @@
 </th>
 <th scope="col">
   <a
-    href="{{ url_for('authors.authors', sort='country_id', order=next_order) }}"
+    href="{{ url_for('authors.authors', sort='country_name', order=next_order) }}"
   >
-    Country Id {% if sort_column == 'country_id' %} {% if current_order == 'asc'
+    Country {% if sort_column == 'country_name' %} {% if current_order == 'asc'
     %} ▲ {% elif current_order == 'desc' %} ▼ {% endif %} {% endif %}
   </a>
 </th>

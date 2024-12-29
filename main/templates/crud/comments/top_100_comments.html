@@ -1,0 +1,23 @@
+{% extends "/crud/crud_layout.html" %}
+{% block title %}Top 100 Comments{% endblock %}
+{% block header %}Top 100 Comments{% endblock %}
+{% block add %}{% endblock %}
+{% block add_title %}{% endblock %}
+{% block headers %}
+<th scope="col">Rank</th>
+<th scope="col">Username</th>
+<th scope="col">Book Title</th>
+<th scope="col">Comment</th>
+<th scope="col">Score</th>
+{% endblock %}
+{% block rows %}
+{% for comment in top_comments %}
+<tr>
+  <td>{{ loop.index }}</td>
+  <td>{{ comment[3] }}</td>
+  <td>{{ comment[4] }}</td>
+  <td>{{ comment[1] }}</td>
+  <td>{{ comment[2] }}</td>
+</tr>
+{% endfor %}
+{% endblock %}

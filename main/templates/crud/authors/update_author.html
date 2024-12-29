@@ -25,7 +25,20 @@
     <input type="url" class="form-control" id="img_url" name="img_url" value="{{ author.img_url }}">
 </div>
 <div class="mb-3">
-    <label for="country_id" class="form-label">Country ID</label>
-    <input type="text" class="form-control" id="country_id" name="country_id" value="{{ author.country_id }}" required>
+    <label for="country_id" class="form-label">Country</label>
+    <select class="form-select" id="country_id" name="country_id" required>
+        <option value="1" {% if author.country_id == 1 %}selected{% endif %}>South Africa</option>
+        <option value="2" {% if author.country_id == 2 %}selected{% endif %}>Germany</option>
+        <option value="3" {% if author.country_id == 3 %}selected{% endif %}>India</option>
+        <option value="4" {% if author.country_id == 4 %}selected{% endif %}>Brazil</option>
+        <option value="5" {% if author.country_id == 5 %}selected{% endif %}>Japan</option>
+        <option value="6" {% if author.country_id == 6 %}selected{% endif %}>United Kingdom</option>
+        <option value="7" {% if author.country_id == 7 %}selected{% endif %}>Spain</option>
+        <option value="8" {% if author.country_id == 8 %}selected{% endif %}>France</option>
+        <option value="9" {% if author.country_id == 9 %}selected{% endif %}>Australia</option>
+        <option value="10" {% if author.country_id == 10 %}selected{% endif %}>Italy</option>
+        <option value="11" {% if author.country_id == 11 %}selected{% endif %}>United States</option>
+        <option value="12" {% if author.country_id == 12 %}selected{% endif %}>Canada</option>
+    </select>
 </div>
 {% endblock %}

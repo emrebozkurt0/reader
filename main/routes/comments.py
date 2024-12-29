@@ -120,3 +120,18 @@ def search_comments():
             return f"Error occurred while searching for comments: {e}", 500
 
     return redirect(url_for("comments.comments"))
+
+@comments_bp.route("/comments/top_100_comments")
+@login_required
+def top_comments():
+    try:
+        connection = get_connection()
+        comment = Comments(connection)
+        top_comments = comment.get_top_comments(limit=100)
+        
+        return render_template(
+            "/crud/comments/top_100_comments.html",
+            top_comments=top_comments
+        )
+    except Exception as e:
+        return f"Error occurred while fetching the top 10 comments: {e}", 500

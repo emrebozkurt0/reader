@@ -67,27 +67,38 @@ class Authors:
             print(f"Error deleting author {author_id}: {e}")
 
     def search(self, filters):
-        try:
-            cursor = self.connection.cursor()
+        cursor = self.connection.cursor()
+        conditions = []
+        values = []
+        join_query = """
+            SELECT a.author_id, a.author_name, a.gender, a.about, a.img_url, c.country_name
+            FROM Authors a
+            LEFT JOIN Countries c ON a.country_id = c.country_id
+        """
 
-            conditions = []
-            values = []
-            for field, value in filters.items():
-                if value is not None:
-                    conditions.append(f"{field} LIKE %s")
+        for column, value in filters.items():
+            if value: 
+                if column == "country_name":
+                    conditions.append("c.country_name LIKE %s")
                     values.append(f"%{value}%")
-            where_clause = " AND ".join(conditions) if conditions else "1=1"
+                else:
+                    conditions.append(f"{column} LIKE %s")
+                    values.append(f"%{value}%")
+        
+        query = join_query
+        if conditions:
+            query += " WHERE " + " AND ".join(conditions)
 
-            query = f"SELECT * FROM Authors WHERE {where_clause}"
-            cursor.execute(query, tuple(values))
+        try:
+            cursor.execute(query, values)
             results = cursor.fetchall()
-            cursor.close()
-
-            print(f"Found {len(results)} authors matching filters: {filters}")
             return results
         except Exception as e:
-            print(f"Error searching authors: {e}")
+            print("Error during search:", e)
             return []
+        finally:
+            cursor.close()
+
 
     def filter_by_gender(self, gender=None):
         try:
