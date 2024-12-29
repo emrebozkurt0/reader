@@ -3,6 +3,33 @@
 {% block header %}Comments{% endblock %}
 {% block add %}comments/add{% endblock %}
 {% block add_title %}Add Comment{% endblock %}
+{%block search%}
+<form action="{{ url_for('comments.search_comments') }}" method="POST" class="mb-3">
+  <div class="row">
+    <div class="col">
+      <input type="text" class="form-control" name="comment_id" placeholder="Comment ID">
+    </div>
+    <div class="col">
+      <input type="text" class="form-control" name="book_id" placeholder="Book ID">
+    </div>
+    <div class="col">
+      <input type="text" class="form-control" name="comment_datetime" placeholder="Comment Datetime">
+    </div>
+    <div class="col">
+      <input type="text" class="form-control" name="user_id" placeholder="User ID">
+    </div>
+    <div class="col">
+      <input type="text" class="form-control" name="content" placeholder="Content">
+    </div>
+    <div class="col">
+      <input type="text" class="form-control" name="score" placeholder="Score">
+    </div>
+    <div class="col">
+      <button type="submit" class="btn btn-primary" style="width: 150px;">Search</button>
+    </div>
+  </div>
+</form>
+{%endblock%}
 {% block headers %}
 <th scope="col">
   <a href="{{ url_for('comments.comments', sort='comment_id', order=next_order) }}">

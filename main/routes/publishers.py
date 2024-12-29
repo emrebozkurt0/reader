@@ -93,3 +93,29 @@ def delete_publisher(id):
         return redirect(url_for("publishers.publishers"))
     except Exception as e:
         return f"Error occurred while deleting the publisher: {e}", 500
+
+@publishers_bp.route("/publishers/search", methods=["GET", "POST"])
+@login_required
+def search_publishers():
+    if request.method == "POST":
+        filters = {
+            "publisher_id": request.form.get("publisher_id"),
+            "publisher_name": request.form.get("publisher_name"),
+        }
+
+        try:
+            connection = get_connection()
+            publisher = Publishers(connection)
+            results = publisher.search(filters)
+            flash(f"{len(results)} results found.", "success" if results else "warning")
+            return render_template(
+                "/crud/publishers/publishers.html",
+                publishers=results,
+                sort_column=None,
+                current_order=None,
+                next_order=None,
+            )
+        except Exception as e:
+            return f"Error occurred while searching for publishers: {e}", 500
+
+    return redirect(url_for("publishers.publishers"))

@@ -1,6 +1,22 @@
 {% extends "/crud/crud_layout.html" %} {% block title %} Publishers {% endblock
 %} {% block header %}Publishers{% endblock %} {% block add %}publishers/add{%
-endblock %} {% block add_title %}Add Publisher{% endblock %} {% block headers %}
+endblock %} {% block add_title %}Add Publisher{% endblock %} 
+{%block search%}
+<form action="{{ url_for('publishers.search_publishers') }}" method="POST" class="mb-3">
+  <div class="row">
+    <div class="col">
+      <input type="text" class="form-control" name="publisher_id" placeholder="Publisher ID">
+    </div>
+    <div class="col">
+      <input type="text" class="form-control" name="publisher_name" placeholder="Publisher Name">
+    </div>
+    <div class="col">
+      <button type="submit" class="btn btn-primary" style="width: 150px;">Search</button>
+    </div>
+  </div>
+</form>
+{%endblock%}
+{% block headers %}
 <th scope="col">
   <a
     href="{{ url_for('publishers.publishers', sort='publisher_id', order=next_order) }}"

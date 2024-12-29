@@ -92,3 +92,33 @@ def delete_book(id):
         return redirect(url_for("books.books"))
     except Exception as e:
         return f"Error occurred while deleting the book: {e}", 500
+
+@books_bp.route("/books/search", methods=["GET", "POST"])
+@login_required
+def search_books():
+    if request.method == "POST":
+        filters = {
+            "book_id": request.form.get("book_id"),
+            "isbn": request.form.get("isbn"),
+            "title": request.form.get("title"),
+            "author_id": request.form.get("author_id"),
+            "publication_year": request.form.get("publication_year"),
+            "publisher_id": request.form.get("publisher_id"),
+        }
+
+        try:
+            connection = get_connection()
+            book = Books(connection)
+            results = book.search(filters)
+            flash(f"{len(results)} results found.", "success" if results else "warning")
+            return render_template(
+                "/crud/books/books.html",
+                books=results,
+                sort_column=None,
+                current_order=None,
+                next_order=None,
+            )
+        except Exception as e:
+            return f"Error occurred while searching for books: {e}", 500
+
+    return redirect(url_for("books.books"))
