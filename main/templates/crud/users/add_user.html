@@ -1,6 +1,5 @@
 {% extends "/crud/add_layout.html"%} {%block add_title%}Add User{%endblock%}
 {%block add_header%}Add User{%endblock%}
-{%block add_button%}Add User{%endblock%} 
 {%block action%}/users/add{%endblock%} {%block fields%}
 <div class="mb-3">
     <label for="name" class="form-label">Name</label>
@@ -41,4 +40,7 @@
         <option value="1">Admin</option>
     </select>
 </div>
+<button type="submit" class="btn btn-success">
+    Add User
+</button>
 {%endblock%}

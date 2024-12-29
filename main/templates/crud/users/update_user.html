@@ -1,7 +1,6 @@
 {% extends "/crud/add_layout.html" %}
 {% block add_title %}Update User{% endblock %}
 {% block add_header %}Update User{% endblock %}
-{% block add_button %}Update User{% endblock %}
 {% block action %}/users/update/{{ user.user_id }}{% endblock %}
 {% block fields %}
 <div class="mb-3">
@@ -45,6 +44,8 @@
         <option value="0" {% if user.role == 0 %}selected{% endif %}>User</option>
     </select>
 </div>
-
+<button type="submit" class="btn btn-success">
+    Update User
+</button>
 
 {% endblock %}

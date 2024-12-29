@@ -1,6 +1,5 @@
 {% extends "/crud/add_layout.html"%} {%block add_title%}Add Book{%endblock%}
 {%block add_header%}Add Book{%endblock%}
-{%block add_button%}Add Book{%endblock%} 
 {%block action%}/books/add{%endblock%} {%block fields%}
 <div class="mb-3">
   <label for="isbn" class="form-label">ISBN</label>
@@ -40,4 +39,7 @@
     required
   />
 </div>
+<button type="submit" class="btn btn-success">
+  Add Book
+</button>
 {%endblock%}
