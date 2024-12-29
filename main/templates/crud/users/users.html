@@ -89,15 +89,23 @@
   </a>
 </th>
 <th scope="col">
-  <a href="{{ url_for('users.users', sort='subscription_id', order=next_order) }}">
-    Subscription Plan {% if sort_column == 'subscription_id' %} 
+  <a href="{{ url_for('users.users', sort='subscription_plan', order=next_order) }}">
+    Subscription Plan {% if sort_column == 'subscription_plan' %} 
       {% if current_order == 'asc' %} ▲ 
       {% elif current_order == 'desc' %} ▼ 
       {% endif %} 
     {% endif %}
   </a>
 </th>
-<th scope="col">Role</th>
+<th scope="col">
+  <a href="{{ url_for('users.users', sort='role', order=next_order) }}">
+    Role {% if sort_column == 'role' %} 
+      {% if current_order == 'asc' %} ▲ 
+      {% elif current_order == 'desc' %} ▼ 
+      {% endif %} 
+    {% endif %}
+  </a>
+</th>
 <th scope="col">Operations</th>
 {% endblock %}
 {% block rows %}

@@ -13,12 +13,12 @@
     <input type="text" class="form-control" id="book_id" name="book_id" value="{{ comment.book_id }}" required>
 </div>
 <div class="mb-3">
-    <label for="comment_text" class="form-label">Comment Text</label>
-    <textarea class="form-control" id="comment_text" name="comment_text" required>{{ comment.content }}</textarea>
+    <label for="content" class="form-label">Comment Text</label>
+    <textarea class="form-control" id="content" name="content" required>{{ comment.content }}</textarea>
 </div>
 <div class="mb-3">
     <label for="score" class="form-label">Score</label>
-    <input type="number" class="form-control" id="score" name="score" value="{{ comment.score }}" min="1" max="5" required>
+    <input type="number" class="form-control" id="score" name="score" value="{{ comment.score }}" required>
 </div>
 {% endblock %}
 

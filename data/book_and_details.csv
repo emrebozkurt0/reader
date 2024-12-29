@@ -3655,10 +3655,8 @@ book_id;title;page_number;publisher_name;counts_of_review;publication_year;langu
 3654;The Selected Poems;160;Anvil Press Poetry;28;1998;;Li Bai;0;856462918;1328;2099
 3655;Li Po and Tu Fu: Poems;256;Penguin Classics;29;1973;eng;Li Bai;3;140442723;58;2099
 3656;A Floating Life;320;Ecco;9;2000;;Simon Elegant;2;880016566;546;2100
-3657;混血王子的背叛 (哈利波特 #6);735;皇冠文化出版有限公司;0;2005;zho;J.K. Rowling;4;9573321742;1329;1
 3658;Li Po-Yuan;189;Twayne Publishers;0;1981;;Douglas Lancashire;4;805764496;124;2101
 3659;The Poet Li Po;72;University Press of Hawaii;1;1975;;Chia-yee Yung Teng;0;824802241;1330;2102
-3660;火盃的考驗 (哈利波特 #4);768;皇冠文化出版有限公司;2;2001;zho;J.K. Rowling;3;9573318318;1329;1
 3661;Ascended Master Dictations: Letters to a Chela;328;1st Book Library;0;2001;;Li Bai;2;759675414;1331;2099
 3662;Five T'ang Poets;184;Oberlin College Press;23;1990;eng;Wang Wei;4;093244055X;1332;2103
 3663;Bright Moon Perching Birds: Poems;162;Wesleyan;0;1987;;Li Bai;0;819511447;1333;2099
@@ -8102,7 +8100,6 @@ book_id;title;page_number;publisher_name;counts_of_review;publication_year;langu
 8101;From Far Away Vol. 14;208;VIZ Media;36;2007;eng;Kyoko Hikawa;0;142150541X;2225;4302
 8102;Very Far Away from Anywhere Else;133;HMH Books for Young Readers;178;2004;en-US;Ursula K. Le Guin;3;152052089;153;4303
 8103;Vagabond Volume 20;224;VIZ Media LLC;13;2005;eng;Takehiko Inoue;3;1591165830;333;4304
-8104;彼方から 13;178;Hakusen Sha;0;2002;jpn;Kyoko Hikawa;1;4592175433;2236;4302
 8105;Tsubasa: RESERVoir CHRoNiCLE Vol. 11;183;Del Rey;36;2006;eng;CLAMP;2;345485289;137;4305
 8106;Tsubasa: RESERVoir CHRoNiCLE Vol. 3;196;Del Rey;66;2004;eng;CLAMP;0;345471830;137;4305
 8107;Tsubasa: RESERVoir CHRoNiCLE Vol. 1;197;Del Rey;400;2004;eng;CLAMP;1;345470575;137;4305
@@ -8112,29 +8109,13 @@ book_id;title;page_number;publisher_name;counts_of_review;publication_year;langu
 8111;Tsubasa: RESERVoir CHRoNiCLE Vol. 04 (Tsubasa: RESERVoir CHRoNiCLE #4);192;Del Rey Books;50;2005;eng;CLAMP;4;034547791X;5;4305
 8112;Tsubasa: RESERVoir CHRoNiCLE Vol. 09;184;Del Rey;43;2006;eng;CLAMP;4;345484290;137;4305
 8113;Tsubasa: RESERVoir CHRoNiCLE Vol. 12;184;Del Rey;39;2007;eng;CLAMP;0;345485327;137;4305
-8114;ツバサ-RESERVoir CHRoNiCLE- 4;186;講談社;2;2004;jpn;CLAMP;1;4063633381;2237;4305
-8115;ツバサ-RESERVoir CHRoNiCLE- 6;186;講談社;1;2004;jpn;CLAMP;4;4063633934;2237;4305
-8116;ツバサ-RESERVoir CHRoNiCLE- 3;190;講談社;1;2003;jpn;CLAMP;3;4063633225;2237;4305
-8117;ツバサ-RESERVoir CHRoNiCLE- 7;188;講談社;2;2004;jpn;CLAMP;4;4063634167;2237;4305
-8118;ツバサ-RESERVoir CHRoNiCLE- 8;187;講談社;0;2004;jpn;CLAMP;5;4063634523;2237;4305
 8119;Hikaru no Go Vol. 7: The Young Lions Tournament (Hikaru no Go #7);205;VIZ Media LLC;18;2006;eng;Yumi Hotta;1;1421506416;333;4306
 8120;Hikaru no Go Vol. 8: The Pro Test Preliminaries: Day Four (Hikaru no Go #8);205;VIZ Media LLC;15;2006;eng;Yumi Hotta;1;1421506424;333;4306
 8121;Hikaru no Go Vol. 1: Descent of the Go Master (Hikaru no Go #1);187;VIZ Media LLC;207;2004;eng;Yumi Hotta;1;159116222X;333;4306
 8122;Hikaru no Go Vol. 9: The Pro Test Begins (Hikaru no Go #9);207;VIZ Media LLC;21;2007;eng;Yumi Hotta;3;1421510669;333;4306
 8123;Hikaru no Go Vol. 10: Lifeline (Hikaru no Go #10);203;VIZ Media LLC;20;2007;eng;Yumi Hotta;1;1421510677;333;4306
-8124;ヒカルの碁 18、番外編;211;集英社;7;2002;jpn;Yumi Hotta;5;4088732898;807;4306
-8125;ヒカルの碁 23、あなたに呼びかけている;198;集英社;5;2003;jpn;Yumi Hotta;0;4088735048;807;4306
-8126;ヒカルの碁 7、若獅子戦;208;集英社;2;2000;jpn;Yumi Hotta;4;4088728734;807;4306
-8127;ヒカルの碁 15、さよなら;211;集英社;8;2001;jpn;Yumi Hotta;4;4088732154;807;4306
-8128;ヒカルの碁 13、プロ第一戦;195;集英社;2;2001;jpn;Yumi Hotta;2;4088731441;807;4306
-8129;ヒカルの碁 14、sai vs toya koyo;189;集英社;6;2001;jpn;Yumi Hotta;1;4088731697;807;4306
-8130;ヒカルの碁 16、中国棋院;191;集英社;7;2002;jpn;Yumi Hotta;3;4088732324;807;4306
-8131;ヒカルの碁 6、院生試験;211;集英社;2;2000;jpn;Yumi Hotta;5;4088728491;807;4306
 8132;Hikaru No Go Volume 2;194;Turtleback Books;1;2004;;Yumi Hotta;0;1417734493;77;4306
 8133;Hikaru No Go Volume 5;208;Turtleback Books;0;2005;;Yumi Hotta;1;1417734523;77;4306
-8134;ヒカルの碁 9、本戦開始;207;集英社;2;2000;jpn;Yumi Hotta;4;4088730224;807;4306
-8135;ヒカルの碁 22、打倒高永夏;189;集英社;5;2003;jpn;Yumi Hotta;4;4088734327;807;4306
-8136;ヒカルの碁 12、新初段シリーズ;189;集英社;2;2001;jpn;Yumi Hotta;4;4088731107;807;4306
 8137;Death Note Vol. 8: Target (Death Note #8);201;VIZ Media LLC;433;2006;eng;Tsugumi Ohba;4;1421506297;333;1064
 8138;Death Note Vol. 1: Boredom (Death Note #1);195;VIZ Media LLC;3055;2005;eng;Tsugumi Ohba;4;1421501686;333;1064
 8139;Death Note Vol. 4: Love (Death Note #4);204;VIZ Media LLC;700;2006;eng;Tsugumi Ohba;2;142150331X;333;1064
@@ -8252,7 +8233,6 @@ book_id;title;page_number;publisher_name;counts_of_review;publication_year;langu
 8251;Tramps Like Us: A Novel;352;University of Wisconsin Press;3;2003;;Joe Westmoreland;4;299194345;520;4350
 8252;Tramps Like Us;145;Atheneum Books;2;1979;;Barbara Morgenroth;0;689306903;686;4351
 8253;Tramps Like Us: A New Jersey Tale;338;Cyan Communications;10;2007;;Kristen Buckley;3;1905736231;2254;4352
-8254;きみはペット 11 [Kimi wa Petto 11];184;講談社;0;2004;jpn;Yayoi Ogawa;2;4063405141;2237;4349
 8255;Cold Blood: A Sergeant Beef Mystery;224;Academy Chicago Publishers;3;2019;;Leo Bruce;3;897330382;1675;4353
 8256;Suki's Kimono;32;Kids Can Press;126;2005;eng;Chieri Uegaki;0;1553377524;412;4354
 8257;Suki: A like story Vol. 02 (Suki #2);192;TokyoPop;14;2004;;CLAMP;2;1591827612;2250;4305
@@ -8794,7 +8774,6 @@ book_id;title;page_number;publisher_name;counts_of_review;publication_year;langu
 8793;Understanding Terror Networks;220;University of Pennsylvania Press;17;2004;;Marc Sageman;2;812238087;179;4652
 8794;The Hidden Power of Social Networks: Understanding How Work Really Gets Done in Organizations;240;Harvard Business Review Press;9;2004;;Robert L. Cross;3;1591392705;445;4653
 8795;War Trash;368;Vintage;255;2005;eng;Ha Jin;3;1400075793;29;4082
-8796;戰廢品;392;時報出版;0;2005;zho;Ha Jin;4;9571343897;2362;4082
 8797;When We Hurt: Prayer Preparation & Hope for Life's Pain;127;Inspirio;8;2006;;Philip Yancey;0;310810582;2363;4654
 8798;The Elements of Pascal: A Problem Solving Approach for Business;183;John Wiley & Sons;0;1984;;Chris Sherman;5;047180651X;378;4655
 8799;Google Power;434;McGraw-Hill/Osborne Media;2;2005;;Chris Sherman;0;72257873;1034;4655
@@ -9124,7 +9103,6 @@ book_id;title;page_number;publisher_name;counts_of_review;publication_year;langu
 9123;The Lord of the Rings: The Battle for Middle-earth II (Xbox 360): Prima Official Game Guide;176;Prima Games;0;2006;;Eric Mylonas;0;761553924;1021;2008
 9124;Tolkien's Ordinary Virtues: Exploring the Spiritual Themes of the Lord of the Rings;141;InterVarsity Press;40;2002;;Mark Eddy Smith;3;830823123;676;4829
 9125;The Lord of the Rings and The Hobbit (Cliffs Notes);80;Cliffs Notes;3;1977;;Gene B. Hardy;2;822012863;59;4830
-9126;魔戒首部曲：魔戒現身;608;聯經出版事業股份有限公司;0;2001;zho;J.R.R. Tolkien;4;9570823364;2416;4
 9127;A Gateway to Sindarin: A Grammar of an Elvish Language from J.R.R. Tolkien's Lord of the Rings;438;University of Utah Press;0;2004;en-US;David Salo;1;874808006;2380;4831
 9128;The Battle for Middle-earth: Tolkien's Divine Design in The Lord of the Rings;381;Eerdmans;27;2004;;Fleming Rutledge;3;802824978;627;4832
 9129;Faith Journey Through Fantasy Lands: A Christian Dialogue with Harry Potter Star Wars and the Lord of the Rings;179;Augsburg Fortress Publishing;1;2003;;Russell W. Dalton;0;806645717;745;4833
@@ -9135,8 +9113,6 @@ book_id;title;page_number;publisher_name;counts_of_review;publication_year;langu
 9134;What the Corpse Revealed;320;St. Martin's True Crime;18;2000;eng;Hugh    Miller;4;312975732;2417;4838
 9135;Corpse: Nature Forensics and the Struggle to Pinpoint Time of Death;270;Basic Books;70;2002;eng;Jessica Snyder Sachs;4;738207713;326;4839
 9136;The Main Corpse (A Goldy Bear Culinary Mystery #6);384;Bantam;22;1997;en-US;Diane Mott Davidson;3;553574639;241;4840
-9137;魔戒二部曲：雙城奇謀;467;聯經出版事業股份有限公司;0;2001;zho;J.R.R. Tolkien;0;9570823372;2416;4
-9138;魔戒三部曲：王者再臨;573;聯經出版事業股份有限公司;0;2001;zho;J.R.R. Tolkien;4;;2416;4
 9139;Exquisite Corpse;240;Gallery Books;578;1997;eng;Poppy Z. Brite;1;684836270;366;4841
 9140;The King and the Corpse: Tales of the Soul's Conquest of Evil;352;Princeton University Press;0;1956;;Heinrich Robert Zimmer;2;691097798;144;4842
 9141;Moria (The Lord of the Rings Roleplaying Game);96;Decipher Inc.;0;2003;;Decipher RPG;4;1582369585;2418;4843
