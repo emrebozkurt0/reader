@@ -183,3 +183,18 @@ def top_authors():
         )
     except Exception as e:
         return f"Error occurred while fetching the top 100 authors: {e}", 500
+
+@authors_bp.route("/authors/most_reviewed_female_authors")
+@login_required
+def most_reviewed_female_authors():
+    try:
+        connection = get_connection()
+        reviewed_female_authors = Authors(connection)
+        most_reviewed_female_authors = reviewed_female_authors.get_most_reviewed_female_authors(limit=100)
+        
+        return render_template(
+            "/crud/authors/most_reviewed_female_authors.html",
+            most_reviewed_female_authors=most_reviewed_female_authors
+        )
+    except Exception as e:
+        return f"Error occurred while fetching the most reviewed female authors: {e}", 500

@@ -1,0 +1,17 @@
+{% extends "/crud/crud_layout.html" %}
+{% block title %}Most Reviewed Female Authors{% endblock %}
+{% block header %}Most Reviewed Female Authors{% endblock %}
+{% block headers %}
+    <th scope="col">Rank</th>
+    <th scope="col">Author Name</th>
+    <th scope="col">Total Reviews</th>
+{% endblock %}
+{% block rows %}
+    {% for author in most_reviewed_female_authors %}
+    <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ author[0] }}</td>
+        <td>{{ author[1] }}</td>
+    </tr>
+    {% endfor %}
+{% endblock %}

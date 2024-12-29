@@ -140,6 +140,39 @@ class Authors:
             print(f"Error occurred while fetching the top {limit} authors: {e}")
             return []
 
+    def get_most_reviewed_female_authors(self, limit=100):
+        try:
+            cursor = self.connection.cursor()
+
+            query = """
+                SELECT
+                    a.author_name,
+                    SUM(bd.counts_of_review) AS total_reviews
+                FROM 
+                    Authors a
+                JOIN 
+                    Books b ON a.author_id = b.author_id
+                JOIN 
+                    BookDetails bd ON b.book_id = bd.book_id
+                WHERE 
+                    a.gender = 'Female'
+                GROUP BY 
+                    a.author_id, a.author_name
+                ORDER BY 
+                    total_reviews DESC
+                LIMIT %s;
+            """
+
+            cursor.execute(query, (limit,))
+            results = cursor.fetchall()
+            cursor.close()
+
+            print(f"Retrieved top {limit} most reviewed female authors.")
+            return results
+        except Exception as e:
+            print(f"Error occurred while fetching the most reviewed female authors: {e}")
+            return []
+
 
     def get_by_id(self, id):
         cursor = self.connection.cursor()
