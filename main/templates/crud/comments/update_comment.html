@@ -1,7 +1,6 @@
 {% extends "/crud/add_layout.html" %}
 {% block add_title %}Update Comment{% endblock %}
 {% block add_header %}Update Comment{% endblock %}
-{% block add_button %}Update Comment{% endblock %}
 {% block action %}/comments/update/{{ comment.comment_id }}{% endblock %}
 {% block fields %}
 <div class="mb-3">
@@ -20,6 +19,9 @@
     <label for="score" class="form-label">Score</label>
     <input type="number" class="form-control" id="score" name="score" value="{{ comment.score }}" required>
 </div>
+<button type="submit" class="btn btn-success">
+    Update Comment
+  </button>
 {% endblock %}
 
 <form action="/books/delete/{{ book[0] }}" method="POST" style="display:inline;" onsubmit="return confirmDelete()">

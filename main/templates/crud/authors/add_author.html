@@ -1,6 +1,5 @@
 {% extends "/crud/add_layout.html"%} {%block add_title%}Add Author{%endblock%}
 {%block add_header%}Add Author{%endblock%}
-{%block add_button%}Add Author{%endblock%} 
 {%block action%}/authors/add{%endblock%} {%block fields%}
 <div class="mb-3">
     <label for="name" class="form-label">Name</label>
@@ -39,4 +38,7 @@
         <option value="12}">Canada</option>
     </select>
 </div>
+<button type="submit" class="btn btn-success">
+    Add Author
+  </button>
 {%endblock%}

@@ -1,7 +1,6 @@
 {% extends "/crud/add_layout.html" %}
 {% block add_title %}Update Author{% endblock %}
 {% block add_header %}Update Author{% endblock %}
-{% block add_button %}Update Author{% endblock %}
 {% block action %}/authors/update/{{ author.author_id }}{% endblock %}
 {% block fields %}
 <div class="mb-3">
@@ -41,4 +40,7 @@
         <option value="12" {% if author.country_id == 12 %}selected{% endif %}>Canada</option>
     </select>
 </div>
+<button type="submit" class="btn btn-success">
+   Update Author
+  </button>
 {% endblock %}
