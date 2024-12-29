@@ -1,6 +1,7 @@
 import mysql.connector
 from database import get_connection
 from main.classes.authors import Authors
+from main.classes.bookdetails import BookDetails
 from main.classes.comments import Comments  
 from main.classes.publishers import Publishers
 from main.classes.users import Users
@@ -66,6 +67,7 @@ def fill_tables(connection):
         Authors(connection, fill=True)
         Publishers(connection, fill=True)
         Books(connection, fill=True)
+        BookDetails(connection, fill=True)
         Comments(connection, fill=True)
 
     except mysql.connector.Error as err:

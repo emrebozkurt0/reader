@@ -56,13 +56,20 @@ def fill_table(connection, file_path, column_names, table_name, fill=True):
 
                 cursor = connection.cursor()
                 ids = []
-                id = 'country_id' if table_name == 'Countries' else table_name[:-1].lower() + '_id'
+                if table_name == 'Countries':
+                    id = 'country_id'
+                elif table_name == 'BookDetails':
+                    id = 'book_id' 
+                else:
+                    id = table_name[:-1].lower() + '_id'
                 for row in reader:
                     if row[id] in ids:
                         continue
                     columns = ', '.join(column_names)
                     placeholders = ', '.join(['%s'] * len(column_names))
                     sql = f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})"
+                    if table_name == 'BookDetails':
+                        row["book_details_id"] = row[id]
                     values = [row[column] if row[column] != '' else None for column in column_names]
                     cursor.execute(sql, values)
                     ids.append(row[id])
