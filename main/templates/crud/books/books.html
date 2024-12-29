@@ -1,7 +1,13 @@
 {% extends "/crud/crud_layout.html" %} {% block title %} Books {% endblock %} {%
-block header %}Books{% endblock %} {% block add %}books/add{% endblock %} 
+block header %}Books{% endblock %} {% block add %}
+<a
+      href="/books/add"
+      class="btn btn-success"
+      style="width: 150px"
+>
+      Add Book</a
+    >{% endblock %} 
 {%block details%}<a class="btn btn-info text-white" style="width: 150px;" href="/books/detailed_books">Detailed Table</a>{%endblock%}
-{% block add_title %}Add Book{% endblock %}
 {%block search%}
 <form action="{{ url_for('books.search_books') }}" method="POST" class="mb-3">
   <div class="row">

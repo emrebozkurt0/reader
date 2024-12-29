@@ -1,6 +1,13 @@
 {% extends "/crud/crud_layout.html" %} {% block title %} Publishers {% endblock
-%} {% block header %}Publishers{% endblock %} {% block add %}publishers/add{%
-endblock %} {% block add_title %}Add Publisher{% endblock %} 
+%} {% block header %}Publishers{% endblock %} {% block add %}
+<a
+      href="/publishers/add"
+      class="btn btn-success"
+      style="width: 150px"
+    >
+      Add Publisher</a
+    >{%
+endblock %}
 {%block search%}
 <form action="{{ url_for('publishers.search_publishers') }}" method="POST" class="mb-3">
   <div class="row">
