@@ -91,12 +91,6 @@ class Users:
         finally:
             cursor.close()
 
-    def search(self):
-        pass
-
-    def filter(self):
-        pass
-
     def get_by_id(self, id):
         cursor = self.connection.cursor()
         cursor.execute("SELECT * FROM users WHERE user_id = %s", (id,))
@@ -146,3 +140,54 @@ class Users:
         except Exception as e:
             print(f"Error occurred while fetching the top {limit} users: {e}")
             return []
+        
+    def search(self, filters):
+        cursor = self.connection.cursor()
+        conditions = []
+        values = []
+
+        filter_mapping = {
+        "user_id": "u.user_id",
+        "name": "u.name",
+        "email": "u.email",
+        "username": "u.username",
+        "date_of_birth": "u.date_of_birth",
+        "gender": "u.gender",
+        "subscription_id": "u.subscription_id"
+        }
+
+        for key, value in filters.items():
+            if value and key in filter_mapping:
+                conditions.append(f"{filter_mapping[key]} LIKE %s")
+                values.append(f"%{value}%")
+
+        query = """
+        SELECT 
+            u.user_id, 
+            u.name, 
+            u.email, 
+            u.username, 
+            u.date_of_birth, 
+            u.gender, 
+            s.subscription_plan, 
+            u.role
+        FROM 
+            Users u
+        LEFT JOIN 
+            Subscriptions s
+        ON 
+            u.subscription_id = s.subscription_id
+    """
+
+        if conditions:
+            query += " WHERE " + " AND ".join(conditions)
+
+        try:
+            cursor.execute(query, values)
+            results = cursor.fetchall()
+            return results
+        except Exception as e:
+            print("Error during search:", e)
+            return []
+        finally:
+            cursor.close()
