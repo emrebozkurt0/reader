@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for,flash
 from main.classes.books import Books
+from main.classes.bookdetails import BookDetails
 from main.utils.get_data import *
 from main.utils.database import get_connection
 from main.utils.decorators import login_required
@@ -82,6 +83,18 @@ def update_book(id):
         except Exception as e:
             return f"Error occurred while fetching the book data: {e}", 500
 
+@books_bp.route("/books/details/<int:id>",methods=["GET"])
+def get_details(id):
+        try:
+            connection = get_connection()
+            details = BookDetails(connection)
+            details_data = details.get_by_id(id)
+            book = Books(connection)
+            book_data = book.get_by_id(id)
+            return render_template("/crud/books/book_details.html",details=details_data,book=book_data)
+        except Exception as e:
+            return f"Error occurred while fetching the book data: {e}", 500
+
 @books_bp.route("/books/delete/<int:id>", methods=["POST"])
 def delete_book(id):
     try:
@@ -92,7 +105,7 @@ def delete_book(id):
         return redirect(url_for("books.books"))
     except Exception as e:
         return f"Error occurred while deleting the book: {e}", 500
-
+    
 @books_bp.route("/books/search", methods=["GET", "POST"])
 @login_required
 def search_books():
