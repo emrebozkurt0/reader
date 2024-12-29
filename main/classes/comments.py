@@ -1,4 +1,5 @@
 from main.utils.get_data import fill_table
+from flask import flash
 
 class Comments:
     def __init__(self, connection, fill=False):
@@ -46,7 +47,9 @@ class Comments:
             self.connection.commit()
             cursor.close()
             print(f"Added comment: {values}")
+            flash("Comment added successfully.", "success")
         except Exception as e:
+            flash("Comment cannot be added.", "error")
             print(f"Error adding comment: {e}")
 
     def update(self, comment_id, updates):
@@ -61,7 +64,9 @@ class Comments:
             self.connection.commit()
             cursor.close()
             print(f"Comment {comment_id} updated with: {updates}")
+            flash("Comment updated successfully.", "success")
         except Exception as e:
+            flash("Comment cannot be updated.", "error")
             print(f"Error updating comment {comment_id}: {e}")
 
     def delete(self, comment_id):
@@ -72,7 +77,9 @@ class Comments:
             self.connection.commit()
             cursor.close()
             print(f"Comment {comment_id} has been deleted.")
+            flash("Comment deleted successfully.", "success")
         except Exception as e:
+            flash("Comment cannot be deleted.", "error")
             print(f"Error deleting comment {comment_id}: {e}")
 
     def search(self, filters):

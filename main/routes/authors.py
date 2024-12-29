@@ -62,7 +62,6 @@ def add_author():
             connection = get_connection()
             author = Authors(connection)
             author.add(data)
-            flash("Author added successfully.", "success")
             return redirect(url_for("authors.authors"))
         except Exception as e:
             return f"Error occurred while adding the author: {e}", 500
@@ -83,7 +82,6 @@ def update_author(id):
             connection = get_connection()
             author = Authors(connection)
             author.update(id, data)
-            flash("Author updated successfully.", "success")
             return redirect(url_for("authors.authors"))
         except Exception as e:
             return f"Error occurred while updating the author: {e}", 500
@@ -103,7 +101,6 @@ def delete_author(id):
         connection = get_connection()
         author = Authors(connection)
         author.delete(id)
-        flash("Author deleted successfully.", "success")
         return redirect(url_for("authors.authors"))
     except Exception as e:
         return f"Error occurred while deleting the author: {e}", 500

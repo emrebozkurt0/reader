@@ -63,7 +63,6 @@ def add_user():
             connection = get_connection()
             user = Users(connection)
             user.add(data)
-            flash("User added successfully.","success")
             return redirect(url_for("users.users"))
         except Exception as e:
             return f"Error occurred while adding the user: {e}", 500
@@ -86,7 +85,6 @@ def update_user(id):
             connection = get_connection()
             user = Users(connection)
             user.update(data, id)
-            flash("User updated successfully.","success")
             return redirect(url_for("users.users"))
         except Exception as e:
             return f"Error occurred while updating the user: {e}", 500
@@ -108,22 +106,23 @@ def delete_user(id):
         connection = get_connection()
         user = Users(connection)
         user.delete(id)
-        flash("User deleted successfully.","success")
         return redirect(url_for("users.users"))
     except Exception as e:
         return f"Error occurred while deleting the user: {e}", 500
 
-users_bp.route("/users/search", methods=["GET", "POST"])
+@users_bp.route("/users/search", methods=["GET", "POST"])
 @login_required
 def search_users():
     if request.method == "POST":
         filters = {
-            "author_id": request.form.get("author_id"),
-            "author_name": request.form.get("author_name"),
+            "user_id": request.form.get("user_id"),
+            "name": request.form.get("name"),
+            "email": request.form.get("email"),
+            "username": request.form.get("username"),
+            "date_of_birth": request.form.get("date_of_birth"),
             "gender": request.form.get("gender"),
-            "about": request.form.get("about"),
-            "image_url": request.form.get("image_url"),
-            "country_id": request.form.get("country_id"),
+            "subscription_plan": request.form.get("subscription_plan"),
+            "role": request.form.get("role"),
         }
 
         try:

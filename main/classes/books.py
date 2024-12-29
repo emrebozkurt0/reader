@@ -1,4 +1,5 @@
 from main.utils.get_data import fill_table
+from flask import flash
 
 class Books:
     def __init__(self, connection, fill=False):
@@ -36,7 +37,9 @@ class Books:
         try:
             cursor.execute(query, values)
             self.connection.commit()
+            flash("Book added successfully.", "success")
         except Exception as e:
+            flash("Book cannot be added.", "error")
             self.connection.rollback()
             print("Error:", e)
         finally:
@@ -58,7 +61,9 @@ class Books:
         try:
             cursor.execute(query, values)
             self.connection.commit()
+            flash("Book updated successfully.", "success")
         except Exception as e:
+            flash("Book cannot be updated.", "error")
             self.connection.rollback()
             print("Error:", e)
         finally:
@@ -71,17 +76,14 @@ class Books:
         try:
             cursor.execute(query, values)
             self.connection.commit()
+            flash("Book deleted successfully.", "success")
         except Exception as e:
+            flash("Book cannot be deleted.", "error")
             self.connection.rollback()
             print("Error:", e)
         finally:
             cursor.close()
 
-    def search(self):
-        pass
-
-    def filter(self):
-        pass
 
     def get_by_id(self, id):
         cursor = self.connection.cursor()
@@ -100,6 +102,37 @@ class Books:
         else:
             return None
     
+    def get_latest_releases(self, limit=10):
+        """
+        Retrieves the latest published books with author details, excluding publisher name.
+        """
+        try:
+            cursor = self.connection.cursor()
+            
+            query = """
+                SELECT 
+                    b.book_id, 
+                    b.title, 
+                    a.author_name, 
+                    b.publication_year
+                FROM 
+                    Books b
+                LEFT JOIN 
+                    Authors a ON b.author_id = a.author_id
+                ORDER BY 
+                    b.publication_year DESC
+                LIMIT %s;
+            """
+            
+            cursor.execute(query, (limit,))
+            results = cursor.fetchall()
+            cursor.close()
+
+            print(f"Retrieved latest {limit} published books (without publisher).")
+            return results
+        except Exception as e:
+            print(f"Error occurred while fetching the latest books: {e}")
+            return []
     
     def search(self, filters):
         cursor = self.connection.cursor()

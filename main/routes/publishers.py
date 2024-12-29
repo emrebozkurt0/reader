@@ -48,7 +48,6 @@ def add_publisher():
             connection = get_connection()
             publisher = Publishers(connection)
             publisher.add(data)
-            flash("Publisher added successfully.","success")
             return redirect(url_for("publishers.publishers"))
         except Exception as e:
             return f"Error occurred while adding the publisher: {e}", 500
@@ -66,7 +65,6 @@ def update_publisher(id):
             connection = get_connection()
             publisher = Publishers(connection)
             publisher.update(data, id)
-            flash("Publisher updated successfully.","success")
             return redirect(url_for("publishers.publishers"))
         except Exception as e:
             return f"Error occurred while updating the publisher: {e}", 500
@@ -89,7 +87,6 @@ def delete_publisher(id):
         connection = get_connection()
         publisher = Publishers(connection)
         publisher.delete(id)
-        flash("Publisher deleted successfully.","success")
         return redirect(url_for("publishers.publishers"))
     except Exception as e:
         return f"Error occurred while deleting the publisher: {e}", 500

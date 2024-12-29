@@ -38,56 +38,32 @@ Add Comment</a
 {% block headers %}
 <th scope="col">
   <a href="{{ url_for('comments.comments', sort='comment_id', order=next_order) }}">
-    Comment ID {% if sort_column == 'comment_id' %} 
-      {% if current_order == 'asc' %} ▲ 
-      {% elif current_order == 'desc' %} ▼ 
-      {% endif %} 
-    {% endif %}
+    Comment ID
   </a>
 </th>
 <th scope="col">
   <a href="{{ url_for('comments.comments', sort='book_id', order=next_order) }}">
-    Book ID {% if sort_column == 'book_id' %} 
-      {% if current_order == 'asc' %} ▲ 
-      {% elif current_order == 'desc' %} ▼ 
-      {% endif %} 
-    {% endif %}
+    Book ID
   </a>
 </th>
 <th scope="col">
   <a href="{{ url_for('comments.comments', sort='comment_datetime', order=next_order) }}">
-    Comment Datetime {% if sort_column == 'comment_datetime' %} 
-      {% if current_order == 'asc' %} ▲ 
-      {% elif current_order == 'desc' %} ▼ 
-      {% endif %} 
-    {% endif %}
+    Comment Datetime
   </a>
 </th>
 <th scope="col">
   <a href="{{ url_for('comments.comments', sort='user_id', order=next_order) }}">
-    User ID {% if sort_column == 'user_id' %} 
-      {% if current_order == 'asc' %} ▲ 
-      {% elif current_order == 'desc' %} ▼ 
-      {% endif %} 
-    {% endif %}
+    User ID
   </a>
 </th>
 <th scope="col">
   <a href="{{ url_for('comments.comments', sort='content', order=next_order) }}">
-    Content {% if sort_column == 'content' %} 
-      {% if current_order == 'asc' %} ▲ 
-      {% elif current_order == 'desc' %} ▼ 
-      {% endif %} 
-    {% endif %}
+    Content
   </a>
 </th>
 <th scope="col">
   <a href="{{ url_for('comments.comments', sort='score', order=next_order) }}">
-    Score {% if sort_column == 'score' %} 
-      {% if current_order == 'asc' %} ▲ 
-      {% elif current_order == 'desc' %} ▼ 
-      {% endif %} 
-    {% endif %}
+    Score
   </a>
 </th>
 <th scope="col">Operations</th>

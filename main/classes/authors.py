@@ -1,4 +1,5 @@
 from main.utils.get_data import fill_table
+from flask import flash
 
 class Authors:
     def __init__(self, connection, fill=False):
@@ -36,8 +37,10 @@ class Authors:
             cursor.execute(query, values)
             self.connection.commit()
             cursor.close()
+            flash("Author added successfully.", "success")
             print(f"Added author: {values}")
         except Exception as e:
+            flash("Author cannot be added.", "error")
             print(f"Error adding author: {e}")
 
     def update(self, author_id, data):
@@ -51,8 +54,10 @@ class Authors:
             cursor.execute(query, values)
             self.connection.commit()
             cursor.close()
+            flash("Author updated successfully.", "success")
             print(f"Author {author_id} updated with: {data}")
         except Exception as e:
+            flash("Author cannot be added.", "error")
             print(f"Error updating author {author_id}: {e}")
 
     def delete(self, author_id):
@@ -62,8 +67,10 @@ class Authors:
             cursor.execute(query, (author_id,))
             self.connection.commit()
             cursor.close()
+            flash("Author deleted successfully.", "success")
             print(f"Author {author_id} has been deleted.")
         except Exception as e:
+            flash("Author cannot be deleted.", "error")
             print(f"Error deleting author {author_id}: {e}")
 
     def search(self, filters):

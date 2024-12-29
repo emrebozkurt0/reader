@@ -38,21 +38,15 @@ endblock %} {% block header %}Detailed Books{% endblock %} {%block details%}<a
   >
 </th>
 <th scope="col">
-  <a href="{{ url_for('books.detailed_books', sort='isbn', order=next_order) }}"
-    >ISBN {% if sort_column == 'isbn' %} {% if current_order == 'asc' %} ▲ {%
-    elif current_order == 'desc' %} ▼ {% endif %} {% endif %}</a
-  >
-</th>
-<th scope="col">
   <a href="{{ url_for('books.detailed_books', sort='title', order=next_order) }}">
     Title {% if sort_column == 'title' %} {% if current_order == 'asc' %} ▲ {%
     elif current_order == 'desc' %} ▼ {% endif %} {% endif %}
   </a>
 </th>
 <th scope="col">
-  <a href="{{ url_for('books.detailed_books', sort='author_id', order=next_order) }}"
-    >Author Name {% if sort_column == 'author_id' %} {% if current_order == 'asc'
-    %} ▲ {% elif current_order == 'desc' %} ▼ {% endif %} {% endif %}</a
+  <a href="{{ url_for('books.detailed_books', sort='isbn', order=next_order) }}"
+    >ISBN {% if sort_column == 'isbn' %} {% if current_order == 'asc' %} ▲ {%
+    elif current_order == 'desc' %} ▼ {% endif %} {% endif %}</a
   >
 </th>
 <th scope="col">
@@ -67,6 +61,12 @@ endblock %} {% block header %}Detailed Books{% endblock %} {%block details%}<a
   <a href="{{ url_for('books.detailed_books', sort='publisher_id', order=next_order) }}"
     >Publisher Name {% if sort_column == 'publisher_id' %} {% if current_order ==
     'asc' %} ▲ {% elif current_order == 'desc' %} ▼ {% endif %} {% endif %}</a
+  >
+</th>
+<th scope="col">
+  <a href="{{ url_for('books.detailed_books', sort='author_id', order=next_order) }}"
+    >Author Name {% if sort_column == 'author_id' %} {% if current_order == 'asc'
+    %} ▲ {% elif current_order == 'desc' %} ▼ {% endif %} {% endif %}</a
   >
 </th>
 <th scope="col">
