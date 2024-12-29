@@ -1,5 +1,5 @@
 from main.utils.get_data import fill_table
-
+from flask import flash
 
 class Publishers:
     def __init__(self, connection, fill=False):
@@ -19,7 +19,9 @@ class Publishers:
         try:
             cursor.execute(query, values)
             self.connection.commit()
+            flash("Publisher added successfully.","success")
         except Exception as e:
+            flash("Publisher cannot be added.","error")
             self.connection.rollback()
             print("Error:", e)
         finally:
@@ -34,7 +36,9 @@ class Publishers:
         try:
             cursor.execute(query, values)
             self.connection.commit()
+            flash("Publisher updated successfully.","success")
         except Exception as e:
+            flash("Publisher cannot be updated.","error")
             self.connection.rollback()
             print("Error:", e)
         finally:
@@ -46,7 +50,9 @@ class Publishers:
         try:
             cursor.execute(query, (id,))
             self.connection.commit()
+            flash("Publisher deleted successfully.","success")
         except Exception as e:
+            flash("Publisher cannot be deleted.","error")
             self.connection.rollback()
             print("Error:", e)
         finally:

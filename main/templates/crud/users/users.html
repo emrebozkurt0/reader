@@ -65,55 +65,46 @@ block add %}<a href="/users/add" class="btn btn-success" style="width: 150px">
 {%endblock%} {% block headers %}
 <th scope="col">
   <a href="{{ url_for('users.users', sort='user_id', order=next_order) }}">
-    User ID {% if sort_column == 'user_id' %} {% if current_order == 'asc' %} ▲
-    {% elif current_order == 'desc' %} ▼ {% endif %} {% endif %}
+    User ID
   </a>
 </th>
 <th scope="col">
   <a href="{{ url_for('users.users', sort='name', order=next_order) }}">
-    Name {% if sort_column == 'name' %} {% if current_order == 'asc' %} ▲ {%
-    elif current_order == 'desc' %} ▼ {% endif %} {% endif %}
+    Name
   </a>
 </th>
 <th scope="col">
   <a href="{{ url_for('users.users', sort='email', order=next_order) }}">
-    Email {% if sort_column == 'email' %} {% if current_order == 'asc' %} ▲ {%
-    elif current_order == 'desc' %} ▼ {% endif %} {% endif %}
+    Email
   </a>
 </th>
 <th scope="col">
   <a href="{{ url_for('users.users', sort='username', order=next_order) }}">
-    Username {% if sort_column == 'username' %} {% if current_order == 'asc' %}
-    ▲ {% elif current_order == 'desc' %} ▼ {% endif %} {% endif %}
+    Username
   </a>
 </th>
 <th scope="col">
   <a
     href="{{ url_for('users.users', sort='date_of_birth', order=next_order) }}"
   >
-    Birth Date {% if sort_column == 'date_of_birth' %} {% if current_order ==
-    'asc' %} ▲ {% elif current_order == 'desc' %} ▼ {% endif %} {% endif %}
+    Birth Date
   </a>
 </th>
 <th scope="col">
   <a href="{{ url_for('users.users', sort='gender', order=next_order) }}">
-    Gender {% if sort_column == 'gender' %} {% if current_order == 'asc' %} ▲ {%
-    elif current_order == 'desc' %} ▼ {% endif %} {% endif %}
+    Gender
   </a>
 </th>
 <th scope="col">
   <a
     href="{{ url_for('users.users', sort='subscription_plan', order=next_order) }}"
   >
-    Subscription Plan {% if sort_column == 'subscription_plan' %} {% if
-    current_order == 'asc' %} ▲ {% elif current_order == 'desc' %} ▼ {% endif %}
-    {% endif %}
+    Subscription Plan
   </a>
 </th>
 <th scope="col">
   <a href="{{ url_for('users.users', sort='role', order=next_order) }}">
-    Role {% if sort_column == 'role' %} {% if current_order == 'asc' %} ▲ {%
-    elif current_order == 'desc' %} ▼ {% endif %} {% endif %}
+    Role
   </a>
 </th>
 <th scope="col">Operations</th>

@@ -1,5 +1,6 @@
 from textwrap import fill
 from main.utils.get_data import fill_table
+from flask import flash
 
 class Users:
     def __init__(self, connection, fill=False):
@@ -41,7 +42,9 @@ class Users:
         try:
             cursor.execute(query, values)
             self.connection.commit()
+            flash("User added successfully.","success")
         except Exception as e:
+            flash("User cannot be added.","error")
             print(query)
             self.connection.rollback()
             print("Error:", e)
@@ -66,7 +69,9 @@ class Users:
         try:
             cursor.execute(query, values)
             self.connection.commit()
+            flash("User updated successfully.","success")
         except Exception as e:
+            flash("User cannot be updated.","error")
             self.connection.rollback()
             print("Error:", e)
         finally:
@@ -78,7 +83,9 @@ class Users:
         try:
             cursor.execute(query, (id,))
             self.connection.commit()
+            flash("User deleted successfully.","success")
         except Exception as e:
+            flash("User cannot be deleted.","error")
             self.connection.rollback()
             print("Error:", e)
         finally:

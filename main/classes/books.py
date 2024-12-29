@@ -1,4 +1,5 @@
 from main.utils.get_data import fill_table
+from flask import flash
 
 class Books:
     def __init__(self, connection, fill=False):
@@ -36,7 +37,9 @@ class Books:
         try:
             cursor.execute(query, values)
             self.connection.commit()
+            flash("Book added successfully.", "success")
         except Exception as e:
+            flash("Book cannot be added.", "error")
             self.connection.rollback()
             print("Error:", e)
         finally:
@@ -58,7 +61,9 @@ class Books:
         try:
             cursor.execute(query, values)
             self.connection.commit()
+            flash("Book updated successfully.", "success")
         except Exception as e:
+            flash("Book cannot be updated.", "error")
             self.connection.rollback()
             print("Error:", e)
         finally:
@@ -71,7 +76,9 @@ class Books:
         try:
             cursor.execute(query, values)
             self.connection.commit()
+            flash("Book deleted successfully.", "success")
         except Exception as e:
+            flash("Book cannot be deleted.", "error")
             self.connection.rollback()
             print("Error:", e)
         finally:

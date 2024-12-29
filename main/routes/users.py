@@ -63,7 +63,6 @@ def add_user():
             connection = get_connection()
             user = Users(connection)
             user.add(data)
-            flash("User added successfully.","success")
             return redirect(url_for("users.users"))
         except Exception as e:
             return f"Error occurred while adding the user: {e}", 500
@@ -86,7 +85,6 @@ def update_user(id):
             connection = get_connection()
             user = Users(connection)
             user.update(data, id)
-            flash("User updated successfully.","success")
             return redirect(url_for("users.users"))
         except Exception as e:
             return f"Error occurred while updating the user: {e}", 500
@@ -108,7 +106,6 @@ def delete_user(id):
         connection = get_connection()
         user = Users(connection)
         user.delete(id)
-        flash("User deleted successfully.","success")
         return redirect(url_for("users.users"))
     except Exception as e:
         return f"Error occurred while deleting the user: {e}", 500

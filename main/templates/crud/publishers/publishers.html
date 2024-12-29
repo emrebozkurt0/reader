@@ -28,16 +28,14 @@ endblock %}
   <a
     href="{{ url_for('publishers.publishers', sort='publisher_id', order=next_order) }}"
   >
-    Publisher Id {% if sort_column == 'publisher_id' %} {% if current_order ==
-    'asc' %} ▲ {% elif current_order == 'desc' %} ▼ {% endif %} {% endif %}
+    Publisher Id
   </a>
 </th>
 <th scope="col">
   <a
     href="{{ url_for('publishers.publishers', sort='publisher_name', order=next_order) }}"
   >
-    Name {% if sort_column == 'publisher_name' %} {% if current_order == 'asc'
-    %} ▲ {% elif current_order == 'desc' %} ▼ {% endif %} {% endif %}
+    Name
   </a>
 </th>
 <th scope="col">Operations</th>

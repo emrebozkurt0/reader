@@ -38,40 +38,33 @@ block header %}Books{% endblock %} {% block add %}
 {% block headers %}
 <th scope="col">
   <a href="{{ url_for('books.books', sort='book_id', order=next_order) }}"
-    >Book Id {% if sort_column == 'book_id' %} {% if current_order == 'asc' %} ▲
-    {% elif current_order == 'desc' %} ▼ {% endif %} {% endif %}</a
+    >Book Id</a
   >
 </th>
 <th scope="col">
   <a href="{{ url_for('books.books', sort='isbn', order=next_order) }}"
-    >ISBN {% if sort_column == 'isbn' %} {% if current_order == 'asc' %} ▲ {%
-    elif current_order == 'desc' %} ▼ {% endif %} {% endif %}</a
+    >ISBN</a
   >
 </th>
 <th scope="col">
   <a href="{{ url_for('books.books', sort='title', order=next_order) }}">
-    Title {% if sort_column == 'title' %} {% if current_order == 'asc' %} ▲ {%
-    elif current_order == 'desc' %} ▼ {% endif %} {% endif %}
+    Title
   </a>
 </th>
 <th scope="col">
   <a href="{{ url_for('books.books', sort='author_id', order=next_order) }}"
-    >Author ID {% if sort_column == 'author_id' %} {% if current_order == 'asc'
-    %} ▲ {% elif current_order == 'desc' %} ▼ {% endif %} {% endif %}</a
+    >Author ID</a
   >
 </th>
 <th scope="col">
   <a
     href="{{ url_for('books.books', sort='publication_year', order=next_order) }}"
-    >Publication Year {% if sort_column == 'publication_year' %} {% if
-    current_order == 'asc' %} ▲ {% elif current_order == 'desc' %} ▼ {% endif %}
-    {% endif %}</a
+    >Publication Year</a
   >
 </th>
 <th scope="col">
   <a href="{{ url_for('books.books', sort='publisher_id', order=next_order) }}"
-    >Publisher ID {% if sort_column == 'publisher_id' %} {% if current_order ==
-    'asc' %} ▲ {% elif current_order == 'desc' %} ▼ {% endif %} {% endif %}</a
+    >Publisher ID</a
   >
 </th>
 <th scope="col">Operations</th>

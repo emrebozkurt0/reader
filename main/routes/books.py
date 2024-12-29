@@ -88,6 +88,7 @@ def detailed_books():
         cursor.execute(join_query)
         detailed_books = cursor.fetchall()
         cursor.close()
+        print(detailed_books[0])
 
         return render_template(
             "/crud/books/detailed_books.html",
@@ -115,7 +116,6 @@ def add_book():
             connection = get_connection()
             book = Books(connection)
             book.add(data)
-            flash("Book added successfully.", "success")
             return redirect(url_for("books.books"))
         except Exception as e:
             return f"Error occurred while adding the book: {e}", 500
@@ -136,7 +136,6 @@ def update_book(id):
             connection = get_connection()
             book = Books(connection)
             book.update(data, id)
-            flash("Book updated successfully.", "success")
             return redirect(url_for("books.books"))
         except Exception as e:
             return f"Error occurred while updating the book: {e}", 500
@@ -209,7 +208,6 @@ def delete_book(id):
         connection = get_connection()
         book = Books(connection)
         book.delete(id)
-        flash("Book deleted successfully.", "success")
         return redirect(url_for("books.books"))
     except Exception as e:
         return f"Error occurred while deleting the book: {e}", 500
