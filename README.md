@@ -73,3 +73,11 @@ export PYTHONPATH=$(pwd)
 
     This will start the Flask server. By default, it runs on http://127.0.0.1:8080
     Go to http://127.0.0.1:8080 url to view the application.
+
+
+6. **Log in to the Application:**
+
+Once the server is running, you can access the website by logging in with the following credentials:
+
+`Username: admin`
+`Password: admin`
