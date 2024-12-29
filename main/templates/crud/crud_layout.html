@@ -6,11 +6,13 @@
   <h2>{%block header%}{%endblock%}</h2>
   <div class="d-flex align-items-center justify-content-center gap-1">
     <!-- <a href="#" class="btn btn-primary" style="width: 150px;">Filter</a> -->
+    {%block details%}{%endblock%}
     <a
       href="{%block add%}{%endblock%}"
       class="btn btn-success"
       style="width: 150px"
-      >{%block add_title%}{%endblock%}</a
+    >
+      {%block add_title%}{%endblock%}</a
     >
   </div>
 </div>

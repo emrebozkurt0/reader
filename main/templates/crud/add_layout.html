@@ -17,7 +17,8 @@
     <div class="container">
       <h2>{%block add_header%}{%endblock%}</h2>
       <form action="{%block action%}{%endblock%}" method="POST">
-        {%block fields%}{%endblock%} {% if add_button is defined and add_button%}
+        {%block fields%}{%endblock%} 
+        {% if add_button is defined and add_button%}
         <button type="submit" class="btn btn-success">
           {% block add_button %}{% endblock %}
         </button>

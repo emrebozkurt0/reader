@@ -33,6 +33,60 @@ def books():
     except Exception as e:
         return f"Error occurred while fetching the books: {e}", 500
 
+@books_bp.route("/books/detailed_books")
+@login_required
+def detailed_books():
+    sort_column = request.args.get("sort", default=None)
+    current_order = request.args.get("order", default="asc")
+    next_order = "desc" if current_order == "asc" else ("unsorted" if current_order == "desc" else "asc")
+
+    try:
+        connection = get_connection()
+        join_query = """
+        SELECT 
+            b.book_id, 
+            b.title, 
+            b.isbn, 
+            b.publication_year, 
+            p.publisher_name AS publisher_name, 
+            a.author_name AS author_name, 
+            bd.rating, 
+            bd.language, 
+            bd.page_number, 
+            bd.counts_of_review
+        FROM 
+            Books b
+        LEFT JOIN 
+            BookDetails bd
+        ON 
+            b.book_id = bd.book_id
+        LEFT JOIN 
+            Publishers p
+        ON 
+            b.publisher_id = p.publisher_id
+        LEFT JOIN 
+            Authors a
+        ON 
+            b.author_id = a.author_id;
+        """
+        if sort_column and current_order != "unsorted":
+            join_query += f" ORDER BY {sort_column} {current_order.upper()}"
+
+        cursor = connection.cursor()
+        cursor.execute(join_query)
+        detailed_books = cursor.fetchall()
+        cursor.close()
+
+        return render_template(
+            "/crud/books/detailed_books.html",
+            detailed_books=detailed_books,
+            sort_column=sort_column,
+            current_order=current_order,
+            next_order=next_order,
+        )
+    except Exception as e:
+        return f"Error occurred while fetching the detailed books: {e}", 500
+
 
 
 @books_bp.route("/books/add", methods=["GET", "POST"])
