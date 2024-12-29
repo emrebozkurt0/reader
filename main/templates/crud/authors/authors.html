@@ -31,9 +31,9 @@
 </th>
 <th scope="col">
   <a
-    href="{{ url_for('authors.authors', sort='image_url', order=next_order) }}"
+    href="{{ url_for('authors.authors', sort='img_url', order=next_order) }}"
   >
-    Image URL {% if sort_column == 'image_url' %} {% if current_order == 'asc'
+    Image URL {% if sort_column == 'img_url' %} {% if current_order == 'asc'
     %} ▲ {% elif current_order == 'desc' %} ▼ {% endif %} {% endif %}
   </a>
 </th>
