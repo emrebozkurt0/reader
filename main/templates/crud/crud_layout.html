@@ -4,10 +4,17 @@
   style="margin-bottom: 24px"
 >
   <h2>{%block header%}{%endblock%}</h2>
-  <a href="{%block add%}{%endblock%}" class="btn btn-success"
-    >{%block add_title%}{%endblock%}</a
-  >
+  <div class="d-flex align-items-center justify-content-center gap-1">
+    <!-- <a href="#" class="btn btn-primary" style="width: 150px;">Filter</a> -->
+    <a
+      href="{%block add%}{%endblock%}"
+      class="btn btn-success"
+      style="width: 150px"
+      >{%block add_title%}{%endblock%}</a
+    >
+  </div>
 </div>
+{%block search%}{%endblock%}
 <div id="table-wrapper">
   <div id="table-scroll">
     <table class="table col-12">

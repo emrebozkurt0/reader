@@ -112,3 +112,33 @@ def delete_user(id):
         return redirect(url_for("users.users"))
     except Exception as e:
         return f"Error occurred while deleting the user: {e}", 500
+
+users_bp.route("/users/search", methods=["GET", "POST"])
+@login_required
+def search_users():
+    if request.method == "POST":
+        filters = {
+            "author_id": request.form.get("author_id"),
+            "author_name": request.form.get("author_name"),
+            "gender": request.form.get("gender"),
+            "about": request.form.get("about"),
+            "image_url": request.form.get("image_url"),
+            "country_id": request.form.get("country_id"),
+        }
+
+        try:
+            connection = get_connection()
+            user = Users(connection)
+            results = user.search(filters)
+            flash(f"{len(results)} results found.", "success" if results else "warning")
+            return render_template(
+                "/crud/users/users.html",
+                users=results,
+                sort_column=None,
+                current_order=None,
+                next_order=None,
+            )
+        except Exception as e:
+            return f"Error occurred while searching for users: {e}", 500
+
+    return redirect(url_for("users.users"))

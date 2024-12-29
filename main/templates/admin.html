@@ -1,57 +1,57 @@
-{% extends "layout.html" %} {% block title %}Reader Admin Panel{% endblock %} {% block
-content %}
+{% extends "layout.html" %} {% block title %}Reader Admin Panel{% endblock %} {%
+block content %}
 
-  <h1 class="mb-4 text-center text-lg-start">Welcome to Admin Panel</h1>
-  <div class="row g-3">
-    <div class="col-12 col-sm-6 col-lg-3">
-      <div
-        class="bg-white shadow-sm rounded-3 p-4 text-center h-100 d-flex flex-column justify-content-between"
-      >
-        <i class="bi bi-book fs-2 text-success"></i>
-        <h4 class="mt-2">Books</h4>
-        <p>Manage all the books in the system.</p>
-        <a href="/books" class="btn btn-success w-100">View Details</a>
-      </div>
-    </div>
-    <div class="col-12 col-sm-6 col-lg-3">
-      <div
-        class="bg-white shadow-sm rounded-3 p-4 text-center h-100 d-flex flex-column justify-content-between"
-      >
-        <i class="bi bi-person-circle fs-2 text-success"></i>
-        <h4 class="mt-2">Users</h4>
-        <p>Manage registered users.</p>
-        <a href="/users" class="btn btn-success w-100">View Details</a>
-      </div>
-    </div>
-    <div class="col-12 col-sm-6 col-lg-3">
-      <div
-        class="bg-white shadow-sm rounded-3 p-4 text-center h-100 d-flex flex-column justify-content-between"
-      >
-        <i class="bi bi-building fs-2 text-success"></i>
-        <h4 class="mt-2">Publishers</h4>
-        <p>Oversee publisher information.</p>
-        <a href="/publishers" class="btn btn-success w-100">View Details</a>
-      </div>
-    </div>
-    <div class="col-12 col-sm-6 col-lg-3">
-      <div
-        class="bg-white shadow-sm rounded-3 p-4 text-center h-100 d-flex flex-column justify-content-between"
-      >
-        <i class="bi bi-pen fs-2 text-success"></i>
-        <h4 class="mt-2">Authors</h4>
-        <p>Manage author details.</p>
-        <a href="/authors" class="btn btn-success w-100">View Details</a>
-      </div>
-    </div>
-    <div class="col-12 col-sm-6 col-lg-3">
-      <div
-        class="bg-white shadow-sm rounded-3 p-4 text-center h-100 d-flex flex-column justify-content-between"
-      >
-        <i class="bi bi-chat-left fs-2 text-success"></i>
-        <h4 class="mt-2">Comments</h4>
-        <p>View user comments on books.</p>
-        <a href="/comments" class="btn btn-success w-100">View Details</a>
-      </div>
+<h1 class="mb-4 text-center text-lg-start">Welcome to Admin Panel</h1>
+<div class="row g-3">
+  <div class="col-12 col-sm-6 col-lg-4">
+    <div
+      class="bg-white shadow-sm rounded-3 p-4 text-center h-100 d-flex flex-column justify-content-between"
+    >
+      <i class="bi bi-book fs-2 text-success"></i>
+      <h4 class="mt-2">Books</h4>
+      <p>Manage all the books in the system.</p>
+      <a href="/books" class="btn btn-success w-100">View Details</a>
     </div>
   </div>
+  <div class="col-12 col-sm-6 col-lg-4">
+    <div
+      class="bg-white shadow-sm rounded-3 p-4 text-center h-100 d-flex flex-column justify-content-between"
+    >
+      <i class="bi bi-person-circle fs-2 text-success"></i>
+      <h4 class="mt-2">Users</h4>
+      <p>Manage registered users.</p>
+      <a href="/users" class="btn btn-success w-100">View Details</a>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-lg-4">
+    <div
+      class="bg-white shadow-sm rounded-3 p-4 text-center h-100 d-flex flex-column justify-content-between"
+    >
+      <i class="bi bi-building fs-2 text-success"></i>
+      <h4 class="mt-2">Publishers</h4>
+      <p>Oversee publisher information.</p>
+      <a href="/publishers" class="btn btn-success w-100">View Details</a>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-lg-4">
+    <div
+      class="bg-white shadow-sm rounded-3 p-4 text-center h-100 d-flex flex-column justify-content-between"
+    >
+      <i class="bi bi-pen fs-2 text-success"></i>
+      <h4 class="mt-2">Authors</h4>
+      <p>Manage author details.</p>
+      <a href="/authors" class="btn btn-success w-100">View Details</a>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-lg-4">
+    <div
+      class="bg-white shadow-sm rounded-3 p-4 text-center h-100 d-flex flex-column justify-content-between"
+    >
+      <i class="bi bi-chat-left fs-2 text-success"></i>
+      <h4 class="mt-2">Comments</h4>
+      <p>View user comments on books.</p>
+      <a href="/comments" class="btn btn-success w-100">View Details</a>
+    </div>
+  </div>
+</div>
 {% endblock %}

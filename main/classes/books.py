@@ -99,3 +99,27 @@ class Books:
             }
         else:
             return None
+    
+    
+    def search(self, filters):
+        cursor = self.connection.cursor()
+        conditions = []
+        values = []
+
+        for column, value in filters.items():
+            if value: 
+                conditions.append(f"{column} LIKE %s")
+                values.append(f"%{value}%") 
+        query = "SELECT * FROM books"
+        if conditions:
+            query += " WHERE " + " AND ".join(conditions)
+
+        try:
+            cursor.execute(query, values)
+            results = cursor.fetchall()
+            return results
+        except Exception as e:
+            print("Error during search:", e)
+            return []
+        finally:
+            cursor.close()

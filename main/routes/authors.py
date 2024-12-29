@@ -92,3 +92,33 @@ def delete_author(id):
         return redirect(url_for("authors.authors"))
     except Exception as e:
         return f"Error occurred while deleting the author: {e}", 500
+
+@authors_bp.route("/authors/search", methods=["GET", "POST"])
+@login_required
+def search_authors():
+    if request.method == "POST":
+        filters = {
+            "author_id": request.form.get("author_id"),
+            "author_name": request.form.get("author_name"),
+            "gender": request.form.get("gender"),
+            "about": request.form.get("about"),
+            "image_url": request.form.get("image_url"),
+            "country_id": request.form.get("country_id"),
+        }
+
+        try:
+            connection = get_connection()
+            author = Authors(connection)
+            results = author.search(filters)
+            flash(f"{len(results)} results found.", "success" if results else "warning")
+            return render_template(
+                "/crud/authors/authors.html",
+                authors=results,
+                sort_column=None,
+                current_order=None,
+                next_order=None,
+            )
+        except Exception as e:
+            return f"Error occurred while searching for authors: {e}", 500
+
+    return redirect(url_for("authors.authors"))
