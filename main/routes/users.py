@@ -142,3 +142,18 @@ def search_users():
             return f"Error occurred while searching for users: {e}", 500
 
     return redirect(url_for("users.users"))
+
+@users_bp.route("/users/top_100_users")
+@login_required
+def top_users():
+    try:
+        connection = get_connection()
+        comment = Users(connection)
+        top_users = comment.get_top_users(limit=100)
+        
+        return render_template(
+            "/crud/users/top_100_users.html",
+            top_users=top_users
+        )
+    except Exception as e:
+        return f"Error occurred while fetching the top 100 users: {e}", 500

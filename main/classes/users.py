@@ -109,4 +109,33 @@ class Users:
         else:
             return None
 
-    
+    def get_top_users(self, limit=100):
+        try:
+            cursor = self.connection.cursor()
+
+            query = """
+                SELECT 
+                    u.user_id, 
+                    u.name, 
+                    u.username, 
+                    u.email, 
+                    SUM(c.score) AS total_score
+                FROM 
+                    Users u
+                LEFT JOIN 
+                    Comments c ON u.user_id = c.user_id
+                GROUP BY 
+                    u.user_id
+                ORDER BY 
+                    total_score DESC
+                LIMIT %s;
+            """
+            cursor.execute(query, (limit,))
+            results = cursor.fetchall()
+            cursor.close()
+
+            print(f"Retrieved top {limit} users by total comment score.")
+            return results
+        except Exception as e:
+            print(f"Error occurred while fetching the top {limit} users: {e}")
+            return []
