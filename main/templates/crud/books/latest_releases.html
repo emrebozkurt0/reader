@@ -1,0 +1,19 @@
+{% extends "/crud/crud_layout.html" %}
+{% block title %}Latest Releases{% endblock %}
+{% block header %}Latest Releases{% endblock %}
+{% block headers %}
+<th scope="col">Rank</th>
+<th scope="col">Author Name</th>
+<th scope="col">Book Title</th>
+<th scope="col">Publication Year</th>
+{% endblock %}
+{% block rows %}
+{% for record in latest_releases %}
+<tr>
+  <td>{{ loop.index }}</td>
+  <td>{{ record[2] }}</td>
+  <td>{{ record[1] }}</td>
+  <td>{{ record[3] }}</td>
+</tr>
+{% endfor %}
+{% endblock %}

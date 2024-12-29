@@ -61,9 +61,6 @@ class Publishers:
     def search(self):
         pass
 
-    def filter(self):
-        pass
-
     def get_by_id(self, id):
         cursor = self.connection.cursor()
         cursor.execute("SELECT * FROM publishers WHERE publisher_id = %s", (id,))

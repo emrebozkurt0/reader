@@ -84,11 +84,6 @@ class Books:
         finally:
             cursor.close()
 
-    def search(self):
-        pass
-
-    def filter(self):
-        pass
 
     def get_by_id(self, id):
         cursor = self.connection.cursor()
@@ -107,6 +102,37 @@ class Books:
         else:
             return None
     
+    def get_latest_releases(self, limit=10):
+        """
+        Retrieves the latest published books with author details, excluding publisher name.
+        """
+        try:
+            cursor = self.connection.cursor()
+            
+            query = """
+                SELECT 
+                    b.book_id, 
+                    b.title, 
+                    a.author_name, 
+                    b.publication_year
+                FROM 
+                    Books b
+                LEFT JOIN 
+                    Authors a ON b.author_id = a.author_id
+                ORDER BY 
+                    b.publication_year DESC
+                LIMIT %s;
+            """
+            
+            cursor.execute(query, (limit,))
+            results = cursor.fetchall()
+            cursor.close()
+
+            print(f"Retrieved latest {limit} published books (without publisher).")
+            return results
+        except Exception as e:
+            print(f"Error occurred while fetching the latest books: {e}")
+            return []
     
     def search(self, filters):
         cursor = self.connection.cursor()

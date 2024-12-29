@@ -242,3 +242,18 @@ def search_books():
             return f"Error occurred while searching for books: {e}", 500
 
     return redirect(url_for("books.books"))
+
+@books_bp.route("/books/latest_releases")
+@login_required
+def latest_releases():
+    try:
+        connection = get_connection()
+        releases = Books(connection)
+        latest_releases = releases.get_latest_releases(limit=100)
+        
+        return render_template(
+            "/crud/books/latest_releases.html",
+            latest_releases=latest_releases
+        )
+    except Exception as e:
+        return f"Error occurred while fetching the top 100 latest releases: {e}", 500
