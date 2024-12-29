@@ -1,6 +1,12 @@
 {% extends "/crud/crud_layout.html" %} {% block title %} Authors {% endblock %}
-{% block header %}Authors{% endblock %} {% block add %}authors/add{% endblock %}
-{% block add_title %}Add Author{% endblock %} 
+{% block header %}Authors{% endblock %} {% block add %}<a
+href="/authors/add"
+class="btn btn-success"
+style="width: 150px"
+>
+Add Author</a
+>{% endblock %}
+
 {%block search%}
 <form action="{{ url_for('authors.search_authors') }}" method="POST" class="mb-3">
   <div class="row">
