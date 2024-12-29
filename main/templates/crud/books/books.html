@@ -1,6 +1,7 @@
 {% extends "/crud/crud_layout.html" %} {% block title %} Books {% endblock %} {%
-block header %}Books{% endblock %} {% block add %}books/add{% endblock %} {%
-block add_title %}Add Book{% endblock %} 
+block header %}Books{% endblock %} {% block add %}books/add{% endblock %} 
+{%block details%}<a class="btn btn-info text-white" style="width: 150px;" href="/books/detailed_books">Detailed Table</a>{%endblock%}
+{% block add_title %}Add Book{% endblock %}
 {%block search%}
 <form action="{{ url_for('books.search_books') }}" method="POST" class="mb-3">
   <div class="row">
@@ -80,7 +81,7 @@ block add_title %}Add Book{% endblock %}
     <div class="d-flex gap-1">
       <button
         class="btn btn-warning w-100"
-        onclick="location.href='/books/update/{{ book[0] }}'"
+        onclick="location.href='/books/details/{{ book[0] }}'"
       >
         Details
       </button>
