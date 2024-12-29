@@ -1,42 +1,42 @@
-{% extends "/crud/add_layout.html"%}
+{% extends "/crud/add_layout.html" %}
 {% block add_title %}Book Details{% endblock %}
 {% block add_header %}Book Details{% endblock %}
 {% block add_button %}{% endblock %}
 {% block fields %}
 <div class="mb-3">
     <label for="isbn" class="form-label">ISBN</label>
-    <input type="text" class="form-control" id="isbn" name="isbn" value="{{ book.isbn }}" maxlength="13" required disabled>
+    <input type="text" class="form-control" id="isbn" name="isbn" value="{{ book_details.isbn }}" maxlength="13" required disabled>
 </div>
 <div class="mb-3">
     <label for="title" class="form-label">Title</label>
-    <input type="text" class="form-control" id="title" name="title" value="{{ book.title }}" maxlength="100" required disabled>
+    <input type="text" class="form-control" id="title" name="title" value="{{ book_details.title }}" maxlength="100" required disabled>
 </div>
 <div class="mb-3">
-    <label for="author_id" class="form-label">Author ID</label>
-    <input type="text" class="form-control" id="author_id" name="author_id" value="{{ book.author_id }}" required disabled>
+    <label for="author_name" class="form-label">Author Name</label>
+    <input type="text" class="form-control" id="author_name" name="author_name" value="{{ book_details.author_name }}" required disabled>
 </div>
 <div class="mb-3">
     <label for="publication_year" class="form-label">Publication Year</label>
-    <input type="text" class="form-control" id="publication_year" name="publication_year" value="{{ book.publication_year }}" required disabled>
+    <input type="text" class="form-control" id="publication_year" name="publication_year" value="{{ book_details.publication_year }}" required disabled>
 </div>
 <div class="mb-3">
-    <label for="publisher_id" class="form-label">Publisher ID</label>
-    <input type="text" class="form-control" id="publisher_id" name="publisher_id" value="{{ book.publisher_id }}" required disabled>
+    <label for="publisher_name" class="form-label">Publisher Name</label>
+    <input type="text" class="form-control" id="publisher_name" name="publisher_name" value="{{ book_details.publisher_name }}" required disabled>
 </div>
 <div class="mb-3">
     <label for="rating" class="form-label">Rating</label>
-    <input type="text" class="form-control" id="rating" name="rating" value="{{ details.rating }}" maxlength="13" required disabled>
+    <input type="text" class="form-control" id="rating" name="rating" value="{{ book_details.rating }}" maxlength="13" required disabled>
 </div>
 <div class="mb-3">
     <label for="language" class="form-label">Language</label>
-    <input type="text" class="form-control" id="language" name="language" value="{{ details.language }}" maxlength="100" required disabled>
+    <input type="text" class="form-control" id="language" name="language" value="{{ book_details.language }}" maxlength="100" required disabled>
 </div>
 <div class="mb-3">
     <label for="page_number" class="form-label">Number of Pages</label>
-    <input type="text" class="form-control" id="page_number" name="page_number" value="{{ details.page_number }}" required disabled>
+    <input type="text" class="form-control" id="page_number" name="page_number" value="{{ book_details.page_number }}" required disabled>
 </div>
 <div class="mb-3">
     <label for="counts_of_review" class="form-label">Counts of Review</label>
-    <input type="text" class="form-control" id="counts_of_review" name="counts_of_review" value="{{ details.counts_of_review }}" required disabled>
+    <input type="text" class="form-control" id="counts_of_review" name="counts_of_review" value="{{ book_details.counts_of_review }}" required disabled>
 </div>
 {% endblock %}

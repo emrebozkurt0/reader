@@ -1,23 +1,30 @@
-from flask import Blueprint, render_template, request, redirect, url_for,flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from main.classes.books import Books
 from main.classes.bookdetails import BookDetails
 from main.utils.get_data import *
 from main.utils.database import get_connection
 from main.utils.decorators import login_required
 
-books_bp = Blueprint('books', __name__)
+books_bp = Blueprint("books", __name__)
+
 
 @books_bp.route("/books")
 @login_required
 def books():
     sort_column = request.args.get("sort", default=None)
     current_order = request.args.get("order", default="asc")
-    next_order = "desc" if current_order == "asc" else ("unsorted" if current_order == "desc" else "asc")
+    next_order = (
+        "desc"
+        if current_order == "asc"
+        else ("unsorted" if current_order == "desc" else "asc")
+    )
 
     try:
         connection = get_connection()
         if sort_column and current_order != "unsorted":
-            books = get_table_data("Books", sort_column=f"{sort_column} {current_order.upper()}")
+            books = get_table_data(
+                "Books", sort_column=f"{sort_column} {current_order.upper()}"
+            )
         else:
             books = get_table_data("Books")
         bookDetails = get_table_data("BookDetails")
@@ -33,12 +40,17 @@ def books():
     except Exception as e:
         return f"Error occurred while fetching the books: {e}", 500
 
+
 @books_bp.route("/books/detailed_books")
 @login_required
 def detailed_books():
     sort_column = request.args.get("sort", default=None)
     current_order = request.args.get("order", default="asc")
-    next_order = "desc" if current_order == "asc" else ("unsorted" if current_order == "desc" else "asc")
+    next_order = (
+        "desc"
+        if current_order == "asc"
+        else ("unsorted" if current_order == "desc" else "asc")
+    )
 
     try:
         connection = get_connection()
@@ -88,7 +100,6 @@ def detailed_books():
         return f"Error occurred while fetching the detailed books: {e}", 500
 
 
-
 @books_bp.route("/books/add", methods=["GET", "POST"])
 @login_required
 def add_book():
@@ -104,11 +115,12 @@ def add_book():
             connection = get_connection()
             book = Books(connection)
             book.add(data)
-            flash("Book added successfully.","success")
+            flash("Book added successfully.", "success")
             return redirect(url_for("books.books"))
         except Exception as e:
             return f"Error occurred while adding the book: {e}", 500
     return render_template("/crud/books/add_book.html")
+
 
 @books_bp.route("/books/update/<int:id>", methods=["GET", "POST"])
 def update_book(id):
@@ -123,8 +135,8 @@ def update_book(id):
         try:
             connection = get_connection()
             book = Books(connection)
-            book.update(data,id)
-            flash("Book updated successfully.","success")
+            book.update(data, id)
+            flash("Book updated successfully.", "success")
             return redirect(url_for("books.books"))
         except Exception as e:
             return f"Error occurred while updating the book: {e}", 500
@@ -137,17 +149,59 @@ def update_book(id):
         except Exception as e:
             return f"Error occurred while fetching the book data: {e}", 500
 
-@books_bp.route("/books/details/<int:id>",methods=["GET"])
+
+@books_bp.route("/books/details/<int:id>", methods=["GET"])
 def get_details(id):
-        try:
-            connection = get_connection()
-            details = BookDetails(connection)
-            details_data = details.get_by_id(id)
-            book = Books(connection)
-            book_data = book.get_by_id(id)
-            return render_template("/crud/books/book_details.html",details=details_data,book=book_data)
-        except Exception as e:
-            return f"Error occurred while fetching the book data: {e}", 500
+    try:
+        connection = get_connection()
+        cursor = connection.cursor()
+        query = """
+    SELECT 
+        b.title, 
+        b.isbn, 
+        b.publication_year, 
+        p.publisher_name AS publisher_name, 
+        a.author_name AS author_name, 
+        bd.rating, 
+        bd.language, 
+        bd.page_number, 
+        bd.counts_of_review
+    FROM 
+        Books b
+    LEFT JOIN 
+        BookDetails bd
+    ON 
+        b.book_id = bd.book_id
+    LEFT JOIN 
+        Publishers p
+    ON 
+        b.publisher_id = p.publisher_id
+    LEFT JOIN 
+        Authors a
+    ON 
+        b.author_id = a.author_id
+    WHERE 
+        b.book_id = %s;
+    """
+        cursor.execute(query, (id,))
+        book_info = cursor.fetchone()
+        book_details = {
+            "title": book_info[0],
+            "isbn": book_info[1],
+            "publication_year": book_info[2],
+            "publisher_name": book_info[3],
+            "author_name": book_info[4],
+            "rating": book_info[5],
+            "language": book_info[6],
+            "page_number": book_info[7],
+            "counts_of_review": book_info[8],
+        }
+
+        return render_template("/crud/books/book_details.html", book_details=book_details)
+
+    except Exception as e:
+        return f"Error occurred while fetching the book data: {e}", 500
+
 
 @books_bp.route("/books/delete/<int:id>", methods=["POST"])
 def delete_book(id):
@@ -155,11 +209,12 @@ def delete_book(id):
         connection = get_connection()
         book = Books(connection)
         book.delete(id)
-        flash("Book deleted successfully.","success")
+        flash("Book deleted successfully.", "success")
         return redirect(url_for("books.books"))
     except Exception as e:
         return f"Error occurred while deleting the book: {e}", 500
-    
+
+
 @books_bp.route("/books/search", methods=["GET", "POST"])
 @login_required
 def search_books():
