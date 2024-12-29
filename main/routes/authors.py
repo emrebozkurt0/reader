@@ -171,7 +171,7 @@ def search_authors():
 
 @authors_bp.route("/authors/top_100_authors")
 @login_required
-def top_comments():
+def top_authors():
     try:
         connection = get_connection()
         comment = Authors(connection)
@@ -182,4 +182,4 @@ def top_comments():
             top_authors=top_authors
         )
     except Exception as e:
-        return f"Error occurred while fetching the top 10 comments: {e}", 500
+        return f"Error occurred while fetching the top 100 authors: {e}", 500
