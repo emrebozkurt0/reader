@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from main.classes.authors import Authors
-from main.utils.get_data import get_table_data
+from main.utils.get_data import get_table_data, get_join_data
 from main.utils.database import get_connection
 from main.utils.decorators import login_required
 
@@ -15,16 +15,31 @@ def authors():
 
     try:
         connection = get_connection()
+
+        join_query = """
+            SELECT 
+                a.author_id, 
+                a.author_name, 
+                a.gender, 
+                a.about, 
+                a.img_url, 
+                c.country_name
+            FROM 
+                Authors a
+            LEFT JOIN 
+                Countries c
+            ON 
+                a.country_id = c.country_id
+        """
+
         if sort_column and current_order != "unsorted":
-            authors = get_table_data("Authors", sort_column=f"{sort_column} {current_order.upper()}")
-        else:
-            authors = get_table_data("Authors")
-        countries = get_table_data("Countries")
+            sort_column = f"{sort_column} {current_order.upper()}"
+
+        authors = get_join_data(join_query, sort_column)
 
         return render_template(
             "/crud/authors/authors.html",
             authors=authors,
-            countries=countries,
             sort_column=sort_column,
             current_order=current_order,
             next_order=next_order,
@@ -103,17 +118,51 @@ def search_authors():
             "gender": request.form.get("gender"),
             "about": request.form.get("about"),
             "image_url": request.form.get("image_url"),
-            "country_id": request.form.get("country_id"),
+            "country_name": request.form.get("country_name"),
         }
 
         try:
             connection = get_connection()
-            author = Authors(connection)
-            results = author.search(filters)
-            flash(f"{len(results)} results found.", "success" if results else "warning")
+
+            join_query = """
+                SELECT 
+                    a.author_id, 
+                    a.author_name, 
+                    a.gender, 
+                    a.about, 
+                    a.img_url, 
+                    c.country_name
+                FROM 
+                    Authors a
+                LEFT JOIN 
+                    Countries c
+                ON 
+                    a.country_id = c.country_id
+            """
+
+            filter_conditions = []
+            if filters.get("author_id"):
+                filter_conditions.append(f"a.author_id = {filters['author_id']}")
+            if filters.get("author_name"):
+                filter_conditions.append(f"a.author_name LIKE '%{filters['author_name']}%'")
+            if filters.get("gender"):
+                filter_conditions.append(f"a.gender LIKE '%{filters['gender']}%'")
+            if filters.get("about"):
+                filter_conditions.append(f"a.about LIKE '%{filters['about']}%'")
+            if filters.get("image_url"):
+                filter_conditions.append(f"a.img_url LIKE '%{filters['image_url']}%'")
+            if filters.get("country_name"):
+                filter_conditions.append(f"c.country_name LIKE '%{filters['country_name']}%'")
+
+            if filter_conditions:
+                join_query += " WHERE " + " AND ".join(filter_conditions)
+
+            authors = get_join_data(join_query)
+
+            flash(f"{len(authors)} results found.", "success" if authors else "warning")
             return render_template(
                 "/crud/authors/authors.html",
-                authors=results,
+                authors=authors,
                 sort_column=None,
                 current_order=None,
                 next_order=None,

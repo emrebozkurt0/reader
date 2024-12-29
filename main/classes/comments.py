@@ -76,64 +76,57 @@ class Comments:
             print(f"Error deleting comment {comment_id}: {e}")
 
     def search(self, filters):
+        cursor = self.connection.cursor()
+        conditions = []
+        values = []
+
+        for column, value in filters.items():
+            if value: 
+                conditions.append(f"{column} LIKE %s")
+                values.append(f"%{value}%") 
+        query = "SELECT * FROM comments"
+        if conditions:
+            query += " WHERE " + " AND ".join(conditions)
+
         try:
-            cursor = self.connection.cursor()
-
-            conditions = []
-            values = []
-            for field, value in filters.items():
-                if value is not None:
-                    conditions.append(f"{field} LIKE %s")
-                    values.append(f"%{value}%")
-            where_clause = " AND ".join(conditions) if conditions else "1=1"
-
-            query = f"SELECT * FROM comments WHERE {where_clause}"
-            cursor.execute(query, tuple(values))
+            cursor.execute(query, values)
             results = cursor.fetchall()
-            cursor.close()
-
-            print(f"Found {len(results)} comments matching filters: {filters}")
             return results
         except Exception as e:
-            print(f"Error finding comments: {e}")
+            print("Error during search:", e)
             return []
-
-    def filter_by_score(self, min_score=None, max_score=None):
-        try:
-            cursor = self.connection.cursor()
-
-            conditions = []
-            values = []
-            if min_score is not None:
-                conditions.append("score >= %s")
-                values.append(min_score)
-            if max_score is not None:
-                conditions.append("score <= %s")
-                values.append(max_score)
-            where_clause = " AND ".join(conditions) if conditions else "1=1"
-
-            query = f"SELECT * FROM comments WHERE {where_clause}"
-            cursor.execute(query, tuple(values))
-            results = cursor.fetchall()
+        finally:
             cursor.close()
 
-            print(f"Filtered comments by score: min={min_score}, max={max_score}")
-            return results
-        except Exception as e:
-            print(f"Error filtering comments by score: {e}")
-            return []
-
-    def get_top_comments(self, limit=5):
+    def get_top_comments(self, limit=100):
         try:
             cursor = self.connection.cursor()
-            query = f"SELECT * FROM comments ORDER BY score DESC LIMIT %s"
+
+            query = """
+                SELECT 
+                    c.comment_id, 
+                    c.content, 
+                    c.score, 
+                    u.username, 
+                    b.title
+                FROM 
+                    Comments c
+                JOIN 
+                    Books b ON c.book_id = b.book_id
+                JOIN 
+                    Users u ON c.user_id = u.user_id
+                ORDER BY 
+                    c.score DESC
+                LIMIT %s;
+            """
             cursor.execute(query, (limit,))
             results = cursor.fetchall()
             cursor.close()
+
             print(f"Retrieved top {limit} comments by score.")
             return results
         except Exception as e:
-            print(f"Error retrieving top comments: {e}")
+            print(f"Error occurred while fetching the top {limit} comments: {e}")
             return []
 
     def get_by_id(self, id):
