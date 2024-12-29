@@ -100,49 +100,39 @@ class Authors:
             cursor.close()
 
 
-    def filter_by_gender(self, gender=None):
+    def get_top_authors(self, limit=100):
         try:
             cursor = self.connection.cursor()
 
-            conditions = []
-            values = []
-            if gender is not None:
-                conditions.append("gender = %s")
-                values.append(gender)
-            where_clause = " AND ".join(conditions) if conditions else "1=1"
-
-            query = f"SELECT * FROM Authors WHERE {where_clause}"
-            cursor.execute(query, tuple(values))
+            query = """
+                SELECT 
+                    a.author_id, 
+                    a.author_name, 
+                    ROUND(AVG(bd.rating), 2) AS average_rating
+                FROM 
+                    Authors a
+                JOIN 
+                    Books b ON a.author_id = b.author_id
+                JOIN 
+                    BookDetails bd ON b.book_id = bd.book_id
+                GROUP BY 
+                    a.author_id
+                HAVING 
+                    COUNT(b.book_id) > 1
+                ORDER BY 
+                    average_rating DESC
+                LIMIT %s;
+            """
+            cursor.execute(query, (limit,))
             results = cursor.fetchall()
             cursor.close()
 
-            print(f"Filtered authors by gender={gender}")
+            print(f"Retrieved top {limit} authors by average rating.")
             return results
         except Exception as e:
-            print(f"Error filtering authors by gender: {e}")
+            print(f"Error occurred while fetching the top {limit} authors: {e}")
             return []
 
-    def filter_by_country(self, country_id=None):
-        try:
-            cursor = self.connection.cursor()
-
-            conditions = []
-            values = []
-            if country_id is not None:
-                conditions.append("country_id = %s")
-                values.append(country_id)
-            where_clause = " AND ".join(conditions) if conditions else "1=1"
-
-            query = f"SELECT * FROM Authors WHERE {where_clause}"
-            cursor.execute(query, tuple(values))
-            results = cursor.fetchall()
-            cursor.close()
-
-            print(f"Filtered authors by country_id={country_id}")
-            return results
-        except Exception as e:
-            print(f"Error filtering authors by country_id: {e}")
-            return []
 
     def get_by_id(self, id):
         cursor = self.connection.cursor()

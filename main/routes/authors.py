@@ -171,3 +171,18 @@ def search_authors():
             return f"Error occurred while searching for authors: {e}", 500
 
     return redirect(url_for("authors.authors"))
+
+@authors_bp.route("/authors/top_100_authors")
+@login_required
+def top_comments():
+    try:
+        connection = get_connection()
+        comment = Authors(connection)
+        top_authors = comment.get_top_authors(limit=100)
+        
+        return render_template(
+            "/crud/authors/top_100_authors.html",
+            top_authors=top_authors
+        )
+    except Exception as e:
+        return f"Error occurred while fetching the top 10 comments: {e}", 500

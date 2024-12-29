@@ -1,0 +1,19 @@
+{% extends "/crud/crud_layout.html" %}
+{% block title %}Top 100 Authors{% endblock %}
+{% block header %}Top 100 Authors{% endblock %}
+{% block add %}{% endblock %}
+{% block add_title %}{% endblock %}
+{% block headers %}
+    <th scope="col">Rank</th>
+    <th scope="col">Author Name</th>
+    <th scope="col">Average Rating</th>
+{% endblock %}
+{% block rows %}
+    {% for author in top_authors %}
+    <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ author[1] }}</td>
+        <td>{{ author[2] }}</td>
+    </tr>
+    {% endfor %}
+{% endblock %}
