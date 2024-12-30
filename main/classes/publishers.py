@@ -58,9 +58,6 @@ class Publishers:
         finally:
             cursor.close()
 
-    def search(self):
-        pass
-
     def get_by_id(self, id):
         cursor = self.connection.cursor()
         cursor.execute("SELECT * FROM publishers WHERE publisher_id = %s", (id,))
@@ -82,7 +79,7 @@ class Publishers:
         for column, value in filters.items():
             if value: 
                 conditions.append(f"{column} LIKE %s")
-                values.append(f"%{value}%") 
+                values.append(f"{value}%") 
         query = "SELECT * FROM publishers"
         if conditions:
             query += " WHERE " + " AND ".join(conditions)

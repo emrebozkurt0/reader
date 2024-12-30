@@ -141,15 +141,15 @@ def search_authors():
             if filters.get("author_id"):
                 filter_conditions.append(f"a.author_id = {filters['author_id']}")
             if filters.get("author_name"):
-                filter_conditions.append(f"a.author_name LIKE '%{filters['author_name']}%'")
+                filter_conditions.append(f"a.author_name LIKE '{filters['author_name']}%'")
             if filters.get("gender"):
-                filter_conditions.append(f"a.gender LIKE '%{filters['gender']}%'")
+                filter_conditions.append(f"a.gender LIKE '{filters['gender']}%'")
             if filters.get("about"):
-                filter_conditions.append(f"a.about LIKE '%{filters['about']}%'")
+                filter_conditions.append(f"a.about LIKE '{filters['about']}%'")
             if filters.get("image_url"):
-                filter_conditions.append(f"a.img_url LIKE '%{filters['image_url']}%'")
+                filter_conditions.append(f"a.img_url LIKE '{filters['image_url']}%'")
             if filters.get("country_name"):
-                filter_conditions.append(f"c.country_name LIKE '%{filters['country_name']}%'")
+                filter_conditions.append(f"c.country_name LIKE '{filters['country_name']}%'")
 
             if filter_conditions:
                 join_query += " WHERE " + " AND ".join(filter_conditions)

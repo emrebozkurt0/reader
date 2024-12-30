@@ -73,26 +73,17 @@ class Authors:
             flash("Author cannot be deleted.", "error")
             print(f"Error deleting author {author_id}: {e}")
 
-    def search(self, filters):
+    def search_authors(self, filters):
         cursor = self.connection.cursor()
         conditions = []
         values = []
-        join_query = """
-            SELECT a.author_id, a.author_name, a.gender, a.about, a.img_url, c.country_name
-            FROM Authors a
-            LEFT JOIN Countries c ON a.country_id = c.country_id
-        """
 
         for column, value in filters.items():
-            if value: 
-                if column == "country_name":
-                    conditions.append("c.country_name LIKE %s")
-                    values.append(f"%{value}%")
-                else:
-                    conditions.append(f"{column} LIKE %s")
-                    values.append(f"%{value}%")
-        
-        query = join_query
+            if value:
+                conditions.append(f"{column} LIKE %s")
+                values.append(f"{value}%")
+
+        query = "SELECT author_id, author_name, gender, about, img_url, country_id FROM Authors"
         if conditions:
             query += " WHERE " + " AND ".join(conditions)
 

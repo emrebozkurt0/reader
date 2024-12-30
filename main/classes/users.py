@@ -159,7 +159,7 @@ class Users:
         for key, value in filters.items():
             if value and key in filter_mapping:
                 conditions.append(f"{filter_mapping[key]} LIKE %s")
-                values.append(f"%{value}%")
+                values.append(f"{value}%")
 
         query = """
         SELECT 
