@@ -90,7 +90,7 @@ class Comments:
         for column, value in filters.items():
             if value: 
                 conditions.append(f"{column} LIKE %s")
-                values.append(f"%{value}%") 
+                values.append(f"{value}%") 
         query = "SELECT * FROM comments"
         if conditions:
             query += " WHERE " + " AND ".join(conditions)
